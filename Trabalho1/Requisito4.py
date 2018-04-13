@@ -1,63 +1,90 @@
 import cv2
 import numpy as np
+import argparse
 
-class Teste:
+class Req4:
     def __init__(self):
-        self.vid = cv2.VideoCapture(0)
-        cv2.namedWindow("Requisito 2")
-        cv2.setMouseCallback('Requisito 2',self.get_mouse_position)
+        cv2.namedWindow("Requisito 4")
+        cv2.setMouseCallback('Requisito 4',self.get_mouse_position)
         self.cor = (None, None, None)
+
+        self.vid = cv2.VideoCapture(0)
 
     def get_mouse_position(self, event,x,y,flags,param):
         if event == cv2.EVENT_LBUTTONDOWN:
             print("coluna = {}  linha = {}".format(x,y))
-            
+
             #pega a cor no formato BGR
             self.cor = (self.imagem[y][x][0], self.imagem[y][x][1], self.imagem[y][x][2])
+
+            if self.isGray:
+                print("Intensidade do tom de cinza = {}".format(self.cor[0]))
+            else:
+                print("R = {}  G = {}  B = {}".format(self.cor[2], self.cor[1], self.cor[0]))
+
+
+    def checkIfGray(self):
+        #pega as caracteristicas da self.imagem e percorre ela
+        width, height, depth = self.imagem.shape
+
+        if depth == 1:
+            return True
             
-            print("R = {}  G = {}  B = {}".format(self.cor[2], self.cor[1], self.cor[0]))
+        for w in np.arange(0, width):
+            for h in np.arange(0, height):
+                if not ((self.imagem[w][h][0] == self.imagem[w][h][1]) and (self.imagem[w][h][1] == self.imagem[w][h][2])):
+                    return False
+
+        return True
 
     def paint_pixels(self):
-        #pega as caracteristicas da self.imagem e percorre ela
+        #pega as caracteristicas da imagem e percorre ela
         width, height, _ = self.imagem.shape
 
         if self.cor == (None, None, None):
             return
-            
+
         for w in np.arange(0, width):
             for h in np.arange(0, height):
                 color = (self.imagem[w][h][0], self.imagem[w][h][1], self.imagem[w][h][2])
-                if self.is_same_color(color):
+                if self.is_same_color(self.cor, color):
                     self.imagem[w][h] = (0, 0, 255)
 
-    def is_same_color(self, color):
-        dB = (int(self.cor[0]) - int(color[0])) ** 2
-        dG = (int(self.cor[1]) - int(color[1])) ** 2
-        dR = (int(self.cor[2]) - int(color[2])) ** 2
+    def is_same_color(self, cor, color):
+        dB = (int(cor[0]) - int(color[0])) ** 2
+        dG = (int(cor[1]) - int(color[1])) ** 2
+        dR = (int(cor[2]) - int(color[2])) ** 2
 
-        dist = (dB + dG + dR)
+        dist = (dB + dG + dR) ** (0.5)
 
-        if dist < 169:
+        if dist < 13:
             return True
         else:
             return False
 
     def run(self):
-        while True:
-            grabbed, self.imagem = self.vid.read()
+        grabbed, self.imagem = self.vid.read()
+        self.isGray = self.checkIfGray()
 
+        while True:
             if not grabbed or self.imagem is None:
                 break
         
             self.paint_pixels()
 
-            cv2.imshow("Requisito 2", self.imagem)
+            cv2.imshow("Requisito 4", self.imagem)
 
-            #press ESC to quit
-            k = cv2.waitKey(1) & 0xFF
+            if self.cor == (None, None, None):
+                k = cv2.waitKey(30) & 0xFF
+            else:
+                k = cv2.waitKey(1) & 0xFF
+            
             if k == ord("q"):
                 break
 
+            grabbed, self.imagem = self.vid.read()
+
 if __name__ == "__main__":
-    t = Teste()
+    
+    t = Req4()
     t.run()
