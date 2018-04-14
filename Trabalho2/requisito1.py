@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import argparse
 
 class Req1:
     def __init__(self):
