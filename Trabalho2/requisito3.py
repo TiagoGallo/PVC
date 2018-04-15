@@ -1,26 +1,6 @@
 import numpy as np
 import cv2
 import time
-a = 0
-b = 0
-
-def get_mouse_position(event,x,y,flags,param, a,b):
-    '''
-        Método de callback para clique do mouse, quando ocorrer um clique do mouse na janela
-    "Requisito 1" do OpenCV esse método será chamado e vai salvar as coordenadas do mouse na
-    tela. A primeira vez que o método for chamado ele vai salvar as coordenadas iniciais do
-    objeto, a segunda vez ele salva as coordenadas finais e em todas as outras vezes ele não 
-    faz nada.
-    '''
-    if event == cv2.EVENT_LBUTTONDOWN:
-        a = x
-        b = y
-
-cv2.namedWindow("Webcam")
-cv2.namedWindow("img")
-
-cv2.setMouseCallback('img',get_mouse_position)
-cv2.setMouseCallback('Webcam',get_mouse_position)
 
 tam_quadrado = 29 #milimetros
 
@@ -64,6 +44,41 @@ while True:
         break
 
 ######################### PREPARE THE LINEAR EQUATIONS #############################
+
+image_points = []
+model_point = []
+
+for n in range (48):
+    #O ponto na imagem é mapeado por (xi,yi)
+    IMGPoint = imgpoints[n][0][:]
+    #O ponto do objeto é mapeado por (Xi, Yi, Zi)
+    OBJPoint = objpoints[n][:]
+
+    image_points.append(tuple(IMGPoint))
+    model_point.append(tuple(OBJPoint))
+
+
+image_points = np.asarray(image_points)
+model_points = np.asarray(model_point)
+
+camera_matrix = np.array([
+    [763.1999, 0.0, 274.03607],
+    [0.0, 786.5245, 185.9463],
+    [0.0, 0.0, 1.0]
+], dtype='double')
+
+distortions = np.array([
+    [0.3525], [-0.6317], [-0.01622], [-0.03209], [0.38806]
+])
+
+(success, rotation_vector, translation_vector) = cv2.solvePnP(model_points, image_points, camera_matrix, distortions)#, flags=cv2.CV_ITERATIVE)
+(nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(29.0, 0.0, 0.0)]), rotation_vector, translation_vector, camera_matrix, distortions)
+
+print ("Ponto 1 (imagem) = ({},{})\t Ponto 1 (mundo) = ({},{},{})".format(imgpoints[0][0][0], imgpoints[0][0][1], objpoints[0][0], objpoints[0][1], objpoints[0][2]))
+print ("Ponto 2 (imagem) = ({},{})\t Ponto 2 (mundo) = ({},{},{})".format(imgpoints[1][0][0], imgpoints[1][0][1], objpoints[1][0], objpoints[1][1], objpoints[1][2]))
+
+print ( int(nose_end_point2D[0][0][0]), int(nose_end_point2D[0][0][1]))
+'''
 #Cria a matriz dos coeficientes:
 matrix_coef = np.zeros((96,12))
 matrix_results = np.zeros((96,1))
@@ -78,60 +93,29 @@ for n in range (48):
     # p11*Xi + p12*Yi + p13*Zi + p14 + p21*Xi + p22*Yi + p23*Zi + p24 - (xi+yi)*p31*Xi - (xi+yi)*p32*Yi - (xi+yi)*p33*Zi - (xi+yi)*p34 = 0
     #Logo podemos colocar esses coeficientes em um array para incluirmos eles na matrix dos coeficientes
 
-    matrix_coef[2*n][:] = [OBJPoint[0], OBJPoint[1], OBJPoint[2], 1, 0, 0, 0, 0, -(IMGPoint[0])*OBJPoint[0], -(IMGPoint[0])*OBJPoint[1], 
-        -(IMGPoint[0])*OBJPoint[2], -(IMGPoint[0])]
-    matrix_coef[2*n + 1][:] = [0, 0, 0, 0, OBJPoint[0], OBJPoint[1], OBJPoint[2], 1, -(IMGPoint[1])*OBJPoint[0], -(IMGPoint[1])*OBJPoint[1], 
-        -(IMGPoint[1])*OBJPoint[2], -(IMGPoint[1])]
+    matrix_coef[n][:] = [OBJPoint[0], OBJPoint[1], OBJPoint[2], 1, OBJPoint[0], OBJPoint[1], OBJPoint[2], 1, -(IMGPoint[0] + IMGPoint[1])*OBJPoint[0], -(IMGPoint[0] + IMGPoint[1])*OBJPoint[1], 
+        -(IMGPoint[0] + IMGPoint[1])*OBJPoint[2], -(IMGPoint[0] + IMGPoint[1])]
 
     #print("Equacao da linha {} = {}".format(n+1, matrix_coef[n][:]))
-
-    
+'''
+''' 
 # find the eigenvalues and eigenvector of U(transpose).U
 e_vals, e_vecs = np.linalg.eig(np.dot(matrix_coef.T, matrix_coef))  
-
-soma = 100000000000000000
-diff_min = 0
-a, b =  e_vecs.size
-for n in range(b):
-    p = e_vecs[:, n]
-    diff = 0
-    for i in range(48):
-        #O ponto na imagem é mapeado por (xi,yi)
-        IMGPoint = imgpoints[i][0][:]
-        #O ponto do objeto é mapeado por (Xi, Yi, Zi)
-        OBJPoint = objpoints[i][:]
-
-        Pi = np.array(([IMGPoint[0]], [IMGPoint[1]], [1]))
-        Po = np.array(([OBJPoint[0]], [OBJPoint[1]], [OBJPoint[2]], [1]))
-
-        diff += 
-        
-
-
 #extract the eigenvector (column) associated with the minimum eigenvalue
 p = e_vecs[:, np.argmin(e_vals)] 
 
 xi = (imgpoints[0][0][0] + imgpoints[1][0][0])/2
 yi = (imgpoints[0][0][1] + imgpoints[1][0][1])/2
+'''
 
+'''
 print ("Ponto 1 (imagem) = ({},{})\t Ponto 1 (mundo) = ({},{},{})".format(imgpoints[0][0][0], imgpoints[0][0][1], objpoints[0][0], objpoints[0][1], objpoints[0][2]))
 print ("Ponto 2 (imagem) = ({},{})\t Ponto 2 (mundo) = ({},{},{})".format(imgpoints[1][0][0], imgpoints[1][0][1], objpoints[1][0], objpoints[1][1], objpoints[1][2]))
 
 P = np.array(([p[0], p[1], p[2], p[3]], [p[4], p[5], p[6], p[7]], [p[8], p[9], p[10], p[11]]), dtype='float64')
 coordIMG = np.array(([xi], [yi], [1]))
 coordMundoEsperado = np.array(([14.5], [0.0], [0.0], [1]))
-print(P)
 print (np.dot(P,coordMundoEsperado))
 
 print ("Ponto medio = ({},{})".format(xi, yi))
-
-
-#aplicando um metodo de solucao numerica para resiolver esse conjunto de equacoes, temos:
-#U, s, V = np.linalg.svd(matrix_coef)
-
-# solving Ax=b using the equation above
-#c = np.dot(U.T,matrix_results) # c = U^t*b
-#w = np.linalg.lstsq(np.diag(s),c) # w = V^t*c
-#xSVD = np.dot(V.T,w) # x = V*w
-
-#print (xSVD.T)
+'''
