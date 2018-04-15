@@ -4,6 +4,7 @@ import time
 import xml.etree.cElementTree as ET
 from os import listdir
 from os.path import isfile, join
+import os
 
 class Req2:
     def __init__(self):
@@ -203,6 +204,10 @@ class Req2:
 
 def get_xml_id():
     max_id = 0
+
+    if not os.path.exists('./XMLs'):
+        os.makedirs('./XMLs')
+
     onlyfiles = [f for f in listdir('./XMLs') if isfile(join('./XMLs', f))]
     for f in onlyfiles:
         if f[:11] == 'calibration':

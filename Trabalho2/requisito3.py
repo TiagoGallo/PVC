@@ -2,120 +2,118 @@ import numpy as np
 import cv2
 import time
 
-tam_quadrado = 29 #milimetros
+class Req3:
+    def __init__(self):
+        self.tam_quadrado = 29 #milimetros
 
-WebCam = cv2.VideoCapture(0)
+        self.WebCam = cv2.VideoCapture(0)
 
-# termination criteria
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, tam_quadrado, 0.001)
+        # termination criteria
+        self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, self.tam_quadrado, 0.001)
 
-# prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
-objp = np.zeros((6*8,3), np.float32)
-objp[:,:2] = np.mgrid[0:8,0:6].T.reshape(-1,2)
+    def get_points(self):
+        # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
+        objp = np.zeros((6*8,3), np.float32)
+        objp[:,:2] = np.mgrid[0:8,0:6].T.reshape(-1,2)
 
-# Arrays to store object points and image points from all the images.
-objpoints = [] # 3d point in real world space
-imgpoints = [] # 2d points in image plane.
+        # Arrays to store object points and image points from all the images.
+        self.objpoints = [] # 3d point in real world space
+        self.imgpoints = [] # 2d points in image plane.
 
-while True:
-    grab, img = WebCam.read()
-    if not grab:
-        break
+        while True:
+            grab, img = self.WebCam.read()
+            if not grab:
+                break
 
-    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+            cv2.imshow("Webcam", img)
+            gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-    cv2.imshow("Webcam", img)
+            # Find the chess board corners
+            ret, corners = cv2.findChessboardCorners(gray, (8,6),None)
 
-    # Find the chess board corners
-    ret, corners = cv2.findChessboardCorners(gray, (8,6),None)
+            # If found, add object points, image points (after refining them)
+            if ret == True:
+                self.objpoints = objp
+                self.objpoints = self.objpoints * self.tam_quadrado
 
-    # If found, add object points, image points (after refining them)
-    if ret == True:
-        objpoints = objp
-        objpoints = objpoints * tam_quadrado
+                corners2 = cv2.cornerSubPix(gray,corners,(11,11),(-1,-1), self.criteria)
+                self.imgpoints = corners2
 
-        corners2 = cv2.cornerSubPix(gray,corners,(11,11),(-1,-1),criteria)
-        imgpoints = corners2
+                # Draw and display the corners
+                img = cv2.drawChessboardCorners(img, (8,6), corners2,ret)
+                cv2.imshow('img',img)
+                time.sleep(2.0)
+                break
+        
+        self.image_points = []
+        self.model_point = []
 
-        image = img.copy()
-        # Draw and display the corners
-        image = cv2.drawChessboardCorners(image, (8,6), corners2,ret)
-        cv2.imshow('img',image)
-        break
+        for n in range (48):
+            #O ponto na imagem é mapeado por (xi,yi)
+            IMGPoint = self.imgpoints[n][0][:]
+            #O ponto do objeto é mapeado por (Xi, Yi, Zi)
+            OBJPoint = self.objpoints[n][:]
 
-######################### PREPARE THE LINEAR EQUATIONS #############################
-
-image_points = []
-model_point = []
-
-for n in range (48):
-    #O ponto na imagem é mapeado por (xi,yi)
-    IMGPoint = imgpoints[n][0][:]
-    #O ponto do objeto é mapeado por (Xi, Yi, Zi)
-    OBJPoint = objpoints[n][:]
-
-    image_points.append(tuple(IMGPoint))
-    model_point.append(tuple(OBJPoint))
+            self.image_points.append(tuple(IMGPoint))
+            self.model_point.append(tuple(OBJPoint))
 
 
-image_points = np.asarray(image_points)
-model_points = np.asarray(model_point)
+        self.image_points = np.asarray(self.image_points)
+        self.model_points = np.asarray(self.model_point)
 
-camera_matrix = np.array([
-    [763.1999, 0.0, 274.03607],
-    [0.0, 786.5245, 185.9463],
-    [0.0, 0.0, 1.0]
-], dtype='double')
+    def calc_extrinsics(self, n):
+        
+        if n == 0:
+            print ("Calculando os parametros extrinsicos para uma distancia proxima da camera (dmin)")
+        if n == 1:
+            print ("Calculando os parametros extrinsicos para uma distancia media da camera (dmed)")
+        if n == 2:
+            print ("Calculando os parametros extrinsicos para uma distancia longe da camera (dmax)")
 
-distortions = np.array([
-    [0.3525], [-0.6317], [-0.01622], [-0.03209], [0.38806]
-])
+        translations = []
+        for i in range(3):
+            print("Pegando a imagem numero {}".format(i + 1))
+            self.get_points()
+            (success, self.rotation_vector, self.translation_vector) = cv2.solvePnP(self.model_points, self.image_points, self.camera_matrix, self.distortions)
+            dist = np.sqrt((self.translation_vector[0] ** 2) + (self.translation_vector[1] ** 2) + (self.translation_vector[2] ** 2))
+            translations.append(dist)
+        
+        med_dist = (translations[0] + translations[1] + translations[2]) / 3
+        desv_dist = np.sqrt((((med_dist - translations[0]) ** 2) + ((med_dist - translations[1]) ** 2) + ((med_dist - translations[2]) ** 2)) / 3)
 
-(success, rotation_vector, translation_vector) = cv2.solvePnP(model_points, image_points, camera_matrix, distortions)#, flags=cv2.CV_ITERATIVE)
-(nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(29.0, 0.0, 0.0)]), rotation_vector, translation_vector, camera_matrix, distortions)
+        print("A media da norma do vetor de translacao t eh = {}\te o desvio eh = {}".format(med_dist, desv_dist))
 
-print ("Ponto 1 (imagem) = ({},{})\t Ponto 1 (mundo) = ({},{},{})".format(imgpoints[0][0][0], imgpoints[0][0][1], objpoints[0][0], objpoints[0][1], objpoints[0][2]))
-print ("Ponto 2 (imagem) = ({},{})\t Ponto 2 (mundo) = ({},{},{})".format(imgpoints[1][0][0], imgpoints[1][0][1], objpoints[1][0], objpoints[1][1], objpoints[1][2]))
+        
+        
+        #(nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(29.0, 0.0, 0.0)]), self.rotation_vector, self.translation_vector, self.camera_matrix, self.distortions)
 
-print ( int(nose_end_point2D[0][0][0]), int(nose_end_point2D[0][0][1]))
-'''
-#Cria a matriz dos coeficientes:
-matrix_coef = np.zeros((96,12))
-matrix_results = np.zeros((96,1))
+    def create_mean_xml(matrix_media, matrix_desvio, dist_media, dist_desvio):
+        extrinsic = ET.Element("Calibration_extrinsic_parameters")
+        ET.SubElement(distortion, "rows").text = '5\n'
+        ET.SubElement(distortion, "cols").text = '1\n'
+        ET.SubElement(distortion, "dt").text = 'd\n'
+        ET.SubElement(distortion, "data_media").text = '{}\t{}\t{}\t{}\t{}\n'.format(dist_media[0][0], dist_media[0][1], dist_media[0][2], dist_media[0][3], dist_media[0][4])
+        ET.SubElement(distortion, "data_desvio").text = '{}\t{}\t{}\t{}\t{}'.format(dist_desvio[0][0], dist_desvio[0][1], dist_desvio[0][2], dist_desvio[0][3], dist_desvio[0][4])
+        tree = ET.ElementTree(distortion)
+        tree.write('./XMLs/distortion.xml')
 
-for n in range (48):
-    #O ponto na imagem é mapeado por (xi,yi)
-    IMGPoint = imgpoints[n][0][:]
-    #O ponto do objeto é mapeado por (Xi, Yi, Zi)
-    OBJPoint = objpoints[n][:]
+    def get_intrinsic_values(self):
+        self.camera_matrix = np.array([
+            [763.1999, 0.0, 274.03607],
+            [0.0, 786.5245, 185.9463],
+            [0.0, 0.0, 1.0]
+        ], dtype='double')
 
-    #A equação linerar para achar p transposto pode ser escrita como:
-    # p11*Xi + p12*Yi + p13*Zi + p14 + p21*Xi + p22*Yi + p23*Zi + p24 - (xi+yi)*p31*Xi - (xi+yi)*p32*Yi - (xi+yi)*p33*Zi - (xi+yi)*p34 = 0
-    #Logo podemos colocar esses coeficientes em um array para incluirmos eles na matrix dos coeficientes
+        self.distortions = np.array([
+            [0.3525], [-0.6317], [-0.01622], [-0.03209], [0.38806]
+        ])
 
-    matrix_coef[n][:] = [OBJPoint[0], OBJPoint[1], OBJPoint[2], 1, OBJPoint[0], OBJPoint[1], OBJPoint[2], 1, -(IMGPoint[0] + IMGPoint[1])*OBJPoint[0], -(IMGPoint[0] + IMGPoint[1])*OBJPoint[1], 
-        -(IMGPoint[0] + IMGPoint[1])*OBJPoint[2], -(IMGPoint[0] + IMGPoint[1])]
+    def run(self):
+        self.get_intrinsic_values()
+        
+        for n in range (3):
+            self.calc_extrinsics(n)
+        
 
-    #print("Equacao da linha {} = {}".format(n+1, matrix_coef[n][:]))
-'''
-''' 
-# find the eigenvalues and eigenvector of U(transpose).U
-e_vals, e_vecs = np.linalg.eig(np.dot(matrix_coef.T, matrix_coef))  
-#extract the eigenvector (column) associated with the minimum eigenvalue
-p = e_vecs[:, np.argmin(e_vals)] 
-
-xi = (imgpoints[0][0][0] + imgpoints[1][0][0])/2
-yi = (imgpoints[0][0][1] + imgpoints[1][0][1])/2
-'''
-
-'''
-print ("Ponto 1 (imagem) = ({},{})\t Ponto 1 (mundo) = ({},{},{})".format(imgpoints[0][0][0], imgpoints[0][0][1], objpoints[0][0], objpoints[0][1], objpoints[0][2]))
-print ("Ponto 2 (imagem) = ({},{})\t Ponto 2 (mundo) = ({},{},{})".format(imgpoints[1][0][0], imgpoints[1][0][1], objpoints[1][0], objpoints[1][1], objpoints[1][2]))
-
-P = np.array(([p[0], p[1], p[2], p[3]], [p[4], p[5], p[6], p[7]], [p[8], p[9], p[10], p[11]]), dtype='float64')
-coordIMG = np.array(([xi], [yi], [1]))
-coordMundoEsperado = np.array(([14.5], [0.0], [0.0], [1]))
-print (np.dot(P,coordMundoEsperado))
-
-print ("Ponto medio = ({},{})".format(xi, yi))
-'''
+if __name__ == '__main__':
+    Req3().run()
