@@ -3,6 +3,8 @@ import cv2
 import time
 import os
 import xml.etree.cElementTree as ET
+from os import listdir
+from os.path import isfile, join
 
 class Req3:
     def __init__(self):
@@ -52,7 +54,7 @@ class Req3:
             ret, corners = cv2.findChessboardCorners(gray, (8,6),None)
 
             # If found, add object points, image points (after refining them)
-            if ret == True and elapsed > 2:
+            if ret == True and elapsed > 0.2:
                 foundImageWithChessBoard = True
                 self.objpoints = objp
                 self.objpoints = self.objpoints * self.tam_quadrado
@@ -97,33 +99,41 @@ class Req3:
 
         translations = []
         rotacoes = []
-        for i in range(2):
+        distancias = []
+        for i in range(3):
             print("Pegando a imagem numero {}".format(i + 1))
             self.get_points(i, n)
             (success, self.rotation_vector, self.translation_vector) = cv2.solvePnP(self.model_points, self.image_points, self.camera_matrix, self.distortions)
+            rot = cv2.Rodrigues(self.rotation_vector)[0]
 
-            #(nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(29.0, 0.0, 0.0)]), self.rotation_vector, self.translation_vector, self.camera_matrix, self.distortions)
-
+            dist = np.sqrt((self.translation_vector[0] ** 2) + (self.translation_vector[1] ** 2) + (self.translation_vector[2] ** 2))
+            distancias.append(dist)
             translations.append(self.translation_vector)
-            rotacoes.append(self.rotation_vector)
+            rotacoes.append(rot)
 
+        med_dist = (distancias[0] + distancias[1] + distancias[2]) / 3
+        desv_dist = np.sqrt((((med_dist - distancias[0]) ** 2) + ((med_dist - distancias[1]) ** 2) + ((med_dist - distancias[2]) ** 2)) / 3)
+
+        print ("A norma do vetor de translacao para  foi {}mm e o desvio {}mm".format(med_dist, desv_dist))
         self.calc_norma_media_desvio(n, translations, rotacoes)
 
     def calc_norma_media_desvio(self, n, translations, rotacoes):
         translations_media = np.zeros((3,1), dtype='float')
 
+        dists = []
         #calcula o vetor de translacao medio
         for i in range(len(translations)):
             translations_media = np.array(translations_media) + np.array(translations[i])
-        
+            dist_trans = np.sqrt((translations[i][0] ** 2) + (translations[i][1] ** 2) + (translations[i][2] ** 2))
+
         translations_media = np.array(translations_media) / len(translations)
 
 
         #Calcula a distancia media e o desvio da distancia media
         dist_media = np.sqrt((translations_media[0] ** 2) + (translations_media[1] ** 2) + (translations_media[2] ** 2))
+
         desvio = 0
         for i in range(len(translations)):
-            dist_trans = np.sqrt((translations[i][0] ** 2) + (translations[i][1] ** 2) + (translations[i][2] ** 2))
             desvio += (dist_trans - dist_media) ** 2
         
         desvio = np.sqrt(desvio/len(translations))
@@ -158,17 +168,46 @@ class Req3:
             self.rotacao_longe = rotacao_media
             print ("A norma do vetor de translacao para dmax foi {:.2f}mm e o desvio {:.2f}mm".format(dist_media[0], desvio[0]))
             
-    '''
-    def create_mean_xml(matrix_media, matrix_desvio, dist_media, dist_desvio):
+    
+    def create_extrinsic_xml(self):
         extrinsic = ET.Element("Calibration_extrinsic_parameters")
-        ET.SubElement(distortion, "rows").text = '5\n'
-        ET.SubElement(distortion, "cols").text = '1\n'
-        ET.SubElement(distortion, "dt").text = 'd\n'
-        ET.SubElement(distortion, "data_media").text = '{}\t{}\t{}\t{}\t{}\n'.format(dist_media[0][0], dist_media[0][1], dist_media[0][2], dist_media[0][3], dist_media[0][4])
-        ET.SubElement(distortion, "data_desvio").text = '{}\t{}\t{}\t{}\t{}'.format(dist_desvio[0][0], dist_desvio[0][1], dist_desvio[0][2], dist_desvio[0][3], dist_desvio[0][4])
-        tree = ET.ElementTree(distortion)
-        tree.write('./XMLs/distortion.xml')
-    '''
+        
+        min = ET.SubElement(extrinsic, "distancia_minima")
+        translation = ET.SubElement(min, "translacao")
+        ET.SubElement(translation, "cols").text = '1\n'
+        ET.SubElement(translation, "dt").text = 'd\n'
+        ET.SubElement(translation, "data_media").text = '{}\t{}\t{}\n'.format(self.translation_med_perto[0][0], self.translation_med_perto[1][0], self.translation_med_perto[2][0])
+        ET.SubElement(translation, "data_norma_media").text = str(self.norma_t_med_perto[0]) + '\n'
+        ET.SubElement(translation, "data_desvio").text = str(self.desvio_t_perto[0]) + '\n'
+        rotacao = ET.SubElement(min, "rotacao")
+        ET.SubElement(rotacao, "data_media").text = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(self.rotacao_perto[0][0], self.rotacao_perto[0][1], self.rotacao_perto[0][2],
+            self.rotacao_perto[1][0], self.rotacao_perto[1][1], self.rotacao_perto[1][2], self.rotacao_perto[2][0], self.rotacao_perto[2][1], self.rotacao_perto[2][2])
+
+        med = ET.SubElement(extrinsic, "distancia_media")
+        translation = ET.SubElement(med, "translacao")
+        ET.SubElement(translation, "cols").text = '1\n'
+        ET.SubElement(translation, "dt").text = 'd\n'
+        ET.SubElement(translation, "data_media").text = '{}\t{}\t{}\n'.format(self.translation_med_medio[0][0], self.translation_med_medio[1][0], self.translation_med_medio[2][0])
+        ET.SubElement(translation, "data_norma_media").text = str(self.norma_t_med_medio[0]) + '\n'
+        ET.SubElement(translation, "data_desvio").text = str(self.desvio_t_medio[0]) + '\n'
+        rotacao = ET.SubElement(med, "rotacao")
+        ET.SubElement(rotacao, "data_media").text = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(self.rotacao_medio[0][0], self.rotacao_medio[0][1], self.rotacao_medio[0][2],
+            self.rotacao_medio[1][0], self.rotacao_medio[1][1], self.rotacao_medio[1][2], self.rotacao_medio[2][0], self.rotacao_medio[2][1], self.rotacao_medio[2][2])
+
+        max = ET.SubElement(extrinsic, "distancia_longe")
+        translation = ET.SubElement(max, "translacao")
+        ET.SubElement(translation, "cols").text = '1\n'
+        ET.SubElement(translation, "dt").text = 'd\n'
+        ET.SubElement(translation, "data_media").text = '{}\t{}\t{}\n'.format(self.translation_med_longe[0][0], self.translation_med_longe[1][0], self.translation_med_longe[2][0])
+        ET.SubElement(translation, "data_norma_media").text = str(self.norma_t_med_longe[0]) + '\n'
+        ET.SubElement(translation, "data_desvio").text = str(self.desvio_t_longe[0]) + '\n'
+        rotacao = ET.SubElement(max, "rotacao")
+        ET.SubElement(rotacao, "data_media").text = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(self.rotacao_longe[0][0], self.rotacao_longe[0][1], self.rotacao_longe[0][2],
+            self.rotacao_longe[1][0], self.rotacao_longe[1][1], self.rotacao_longe[1][2], self.rotacao_longe[2][0], self.rotacao_longe[2][1], self.rotacao_longe[2][2])
+
+        tree = ET.ElementTree(extrinsic)
+        tree.write('./XMLs/extrinsic.xml')
+    
 
     def get_intrinsic_values(self):
         #Faz a leitura do arquivo intrinsics.xml gerado pelo requisito2.py e retira a matriz de valores
@@ -208,12 +247,20 @@ class Req3:
             ], dtype='double')
 
 
+    def clean_image_directory(self):
+        onlyfiles = [f for f in listdir('./images') if isfile(join('./images', f))]
+
+        for file in onlyfiles:
+            os.remove('./images/' + file)
+
     def run(self):
+        self.clean_image_directory()
         self.get_intrinsic_values()
         
         for n in range (3):
             self.calc_extrinsics(n)
         
+        self.create_extrinsic_xml()
 
 if __name__ == '__main__':
     t = Req3()

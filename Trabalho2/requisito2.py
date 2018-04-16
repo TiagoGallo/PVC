@@ -106,7 +106,7 @@ class Req2:
             ret, corners = cv2.findChessboardCorners(gray, (8,6),None)
 
             # If found, add object points, image points (after refining them)
-            if ret == True and elapsed > 0.1:
+            if ret == True and elapsed > 1:
                 self.detected_images += 1
                 objpoints.append(objp)
 
