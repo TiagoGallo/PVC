@@ -68,6 +68,9 @@ def main_req1(args):
 
     depth_image = get_depth_image(world_coordinates, (imgL.shape[0], imgL.shape[1], 1))
 
+    cv2.imwrite("./depthImages/req1_{}_depth.png".format(args["image"]), depth_image)
+    cv2.imwrite("./disparityImages/req1_{}_disparidade.png".format(args["image"]), disp)
+
     #Aplica um resize nas imagens para facilitar a visualização
     imgL = resize_keep_ar(imgL, cte=3)
     imgR = resize_keep_ar(imgR, cte=3)
@@ -113,6 +116,7 @@ def main_req2(args):
         
         depth_image = get_depth_image(world_coordinates, (imgL.shape[0], imgL.shape[1], 1))
         cv2.imwrite("./depthImages/req2_pic{}_depth.png".format(countImages), depth_image)
+        cv2.imwrite("./disparityImages/req2_pic{}_disparidade.png".format(countImages), disp)
         cv2.imshow("depth", depth_image)
         cv2.waitKey(0)
     
@@ -145,11 +149,14 @@ def main_req3(args):
 
         depth_image = get_depth_image(world_coordinates, (imgL.shape[0], imgL.shape[1], 1))
     
-        print("Utilizando a imagem de teste numero {}, clique na janela image em 2 pontos"
+        print("\nUtilizando a imagem de teste numero {}, clique na janela image em 2 pontos"
             " distintos para medir a distancia deles e aperte 'q' para passar"
-            " pra proxima imagem")
+            " pra proxima imagem".format(countImages))
+        numObject = 0
         while True:
             if Mouse.num_cliques == 2:
+                numObject += 1
+                print("\nCalculando o tamanho do objeto ", numObject)
                 calc_euclidian_distance(world_coordinates, Mouse)
             
             cv2.imshow("depth", depth_image)
@@ -457,6 +464,7 @@ def calc_euclidian_distance(world_coordinates, Mouse):
     xf = Mouse.xf
     yf = Mouse.yf
 
+    print()
     print ("coordenadas do mundo do primeiro ponto = ", world_coordinates[xi][yi][:])
     print ("coordenadas do mundo do segundo ponto = ", world_coordinates[xf][yf][:])
 
@@ -466,7 +474,8 @@ def calc_euclidian_distance(world_coordinates, Mouse):
     tam = (distX + distY + distZ) ** (1/2)
 
     print("O tamanho do objeto eh {}cm".format(tam/10))
-    Mouse.num_cliques += 1
+    Mouse.num_cliques = 0
+    print()
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
