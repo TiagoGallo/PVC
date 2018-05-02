@@ -2,6 +2,35 @@ import cv2
 import numpy as np
 import argparse
 
+class mouse_click:
+    def __init__(self):
+        cv2.namedWindow("image")
+        cv2.setMouseCallback("image", self.click)
+        self.num_cliques = 0
+
+    def click(self, event, x, y, flags, param):
+        # if the left mouse button was clicked, record the starting
+        # (x, y) coordinates and indicate that cropping is being
+        # performed
+        if event == cv2.EVENT_LBUTTONDOWN:
+            if self.num_cliques == 0:
+                self.xi = x
+                self.yi = y
+                self.num_cliques += 1
+                print("Primeiro clique na coordenada ({},{})".format(x,y))
+
+            elif self.num_cliques == 1:
+                self.xf = x
+                self.yf = y
+                self.num_cliques += 1
+                print("Segundo clique na coordenada ({},{})".format(x,y))
+                #self.calc_euclidian_distance()
+
+            else:
+                print("Os dois pontos ja foram pegos e a distancia calculada, aperte"
+                    " 'q' para ir pra proxima imagem")
+                pass 
+
 ##################################################################################
 #                                                                                #
 #                 FUNCOES PRINCIPAIS DE CADA REQUISITO                           #
@@ -89,7 +118,47 @@ def main_req2(args):
     
 def main_req3(args):
     W = int(args["Win_size"])
-    print ("requisito 3 com win size = ", W)
+    
+    intrinsic_MatrixL, intrinsic_MatrixR, points = intrinsic_calibration()
+
+    left_focal_lenght = (intrinsic_MatrixL[1][0][0] + intrinsic_MatrixL[1][1][1]) / 2
+    right_focal_lenght = (intrinsic_MatrixR[1][0][0] + intrinsic_MatrixR[1][1][1]) / 2
+
+    focal_lenght = (left_focal_lenght + right_focal_lenght )/ 20
+
+    extrinsic_calib_params, baseline = extrinsic_calibration(intrinsic_MatrixL, intrinsic_MatrixR, points)
+
+    Retificated_Images_left, Retificated_Images_Right = retification(extrinsic_calib_params)
+
+    Mouse = mouse_click()
+    countImages = 0
+    for (imgL, imgR) in zip(Retificated_Images_left, Retificated_Images_Right):
+        countImages += 1
+    
+        disp = get_disparity_map(imgL, imgR, W)
+        
+        world_coordinates = np.zeros((imgL.shape[1], imgL.shape[0], 3))
+        calc_world_coordinates(world_coordinates, focal_lenght, baseline, disp)
+
+        #Normaliza a profundidade
+        normalize_depth(world_coordinates)
+
+        depth_image = get_depth_image(world_coordinates, (imgL.shape[0], imgL.shape[1], 1))
+    
+        print("Utilizando a imagem de teste numero {}, clique na janela image em 2 pontos"
+            " distintos para medir a distancia deles e aperte 'q' para passar"
+            " pra proxima imagem")
+        while True:
+            if Mouse.num_cliques == 2:
+                calc_euclidian_distance(world_coordinates, Mouse)
+            
+            cv2.imshow("depth", depth_image)
+            cv2.imshow("image", imgL)
+            
+            if cv2.waitKey(1) == ord('q'):
+                break
+        
+        Mouse.num_cliques = 0
 
 ##################################################################################
 #                                                                                #
@@ -330,12 +399,12 @@ def extrinsic_calibration(intrinsic_MatrixL, intrinsic_MatrixR, points):
 
     print("Calibracao dos extrinsicos terminada...")
 
-    print("STEREO: RMS left to  right re-projection error: ", rms_stereo)
+    #print("STEREO: RMS left to  right re-projection error: ", rms_stereo)
 
     #Calcula baseline a partir da matriz de translacao entre as cameras
     #print("T = ", T)
     baseline = ((T[0] ** 2) + (T[1] ** 2) + (T[2] ** 2)) ** (1/2)
-    print("baseline = {}mm".format(baseline[0])) 
+    #print("baseline = {}mm".format(baseline[0])) 
     baseline = baseline[0]
 
     return ((rms_stereo, camera_matrix_l, dist_coeffs_l, camera_matrix_r, dist_coeffs_r, R, T, E, F), baseline)
@@ -381,6 +450,23 @@ def retification(extrinsic_calib_params):
     cv2.destroyAllWindows()
 
     return (Retificated_Images_left, Retificated_Images_Right)
+
+def calc_euclidian_distance(world_coordinates, Mouse):
+    xi = Mouse.xi
+    yi = Mouse.yi
+    xf = Mouse.xf
+    yf = Mouse.yf
+
+    print ("coordenadas do mundo do primeiro ponto = ", world_coordinates[xi][yi][:])
+    print ("coordenadas do mundo do segundo ponto = ", world_coordinates[xf][yf][:])
+
+    distX = (world_coordinates[xi][yi][0] - world_coordinates[xf][yf][0]) ** 2
+    distY = (world_coordinates[xi][yi][1] - world_coordinates[xf][yf][1]) ** 2
+    distZ = (world_coordinates[xi][yi][2] - world_coordinates[xf][yf][2]) ** 2
+    tam = (distX + distY + distZ) ** (1/2)
+
+    print("O tamanho do objeto eh {}cm".format(tam/10))
+    Mouse.num_cliques += 1
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
