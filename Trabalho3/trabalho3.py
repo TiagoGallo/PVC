@@ -44,8 +44,8 @@ def main_req1(args):
     focal_lenght = 25
     baseline = 120
 
-    #Analisa a entrada do usuário para definir se vamos preparar o mapa de profundidade
-    #da imagem do bebê ou da planta
+    #Analisa a entrada do usuario para definir se vamos preparar o mapa de profundidade
+    #da imagem do bebe ou da planta
     if args["image"] == "baby":
         imgL = cv2.imread("./imgs-estereo/babyL.png")
         imgR = cv2.imread("./imgs-estereo/babyR.png")
@@ -71,7 +71,7 @@ def main_req1(args):
     cv2.imwrite("./depthImages/req1_{}_depth.png".format(args["image"]), depth_image)
     cv2.imwrite("./disparityImages/req1_{}_disparidade.png".format(args["image"]), disp)
 
-    #Aplica um resize nas imagens para facilitar a visualização
+    #Aplica um resize nas imagens para facilitar a visualizacao
     imgL = resize_keep_ar(imgL, cte=3)
     imgR = resize_keep_ar(imgR, cte=3)
     disp = resize_keep_ar(disp, cte=3)
@@ -194,7 +194,7 @@ def get_disparity_map(imgL, imgR, W, max_disparity = 128):
     Funcao para calcular a disparidade entre duas imagens
     Recebe as duas imagens, o maximo de pixels de disparidade e o tamanho da janela
 para calcular o SAD
-    Retorna o mapa de disparidade em formato uint8 para permitir visualização
+    Retorna o mapa de disparidade em formato uint8 para permitir visualizacao
     '''
     print("Calculando a disparidade...\n")
     #Transforma a imagem em preto e branco antes de calcular a disparidade
@@ -208,11 +208,11 @@ para calcular o SAD
     # diferences) e janela de tamanho WxW definida pelo usuario no inicio do programa
     disparity = stereoProcessor.compute(imagemL,imagemR)
 
-    #Passa um filtro de Speckles para retirar ruídos da imagem 
+    #Passa um filtro de Speckles para retirar ruidos da imagem 
     cv2.filterSpeckles(disparity, 0, 4000, max_disparity) 
 
     #Muda a escala do mapa de disparidade, pois o OpenCV retorna ele multiplicado por
-    #16 e em um formato não ideal
+    #16 e em um formato nao ideal
     disparity_scaled = (disparity / 16.).astype(np.uint8) + abs(disparity.min())
 
     print("Disparidade calculada...\n")
@@ -246,8 +246,8 @@ def calc_world_coordinates(world_coordinates, focal_lenght, baseline, disp):
 def normalize_depth(world_coordinates):
     '''
     Normaliza a coordenada Z dos pontos no mundo, de forma que
-os pontos mais distantes tenham valor 1, os mais próximos valor 255
-e os que não puderam ser calculados valor 0
+os pontos mais distantes tenham valor 1, os mais proximos valor 255
+e os que nao puderam ser calculados valor 0
     '''
     print("Normalizando a profundidade...")
     Z = world_coordinates[:][:][2]
@@ -278,7 +278,7 @@ def intrinsic_calibration():
     print ("Comecando calibracao dos instrinsecos...\n")
     termination_criteria_subpix = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
-    # Prepara um conjubt de pontos do mundo para o padrão do xadrez
+    # Prepara um conjubt de pontos do mundo para o padrao do xadrez
     patternX = 8
     patternY = 6 
     square_size_in_mm = 29 
