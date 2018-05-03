@@ -68,7 +68,7 @@ def main_req1(args):
 
     depth_image = get_depth_image(world_coordinates, (imgL.shape[0], imgL.shape[1], 1))
 
-    cv2.imwrite("./depthImages/req1_{}_depth.png".format(args["image"]), depth_image)
+    cv2.imwrite("./depthImages/{}_depth.png".format(args["image"]), depth_image)
     cv2.imwrite("./disparityImages/req1_{}_disparidade.png".format(args["image"]), disp)
 
     #Aplica um resize nas imagens para facilitar a visualização
@@ -95,7 +95,7 @@ def main_req2(args):
 
     focal_lenght = (left_focal_lenght + right_focal_lenght )/ 20
 
-    #print("Lfocal = {}\nRfocal = {}\nfocal = {}".format(left_focal_lenght, right_focal_lenght, focal_lenght))
+    print("Lfocal = {}\nRfocal = {}\nfocal = {}".format(left_focal_lenght, right_focal_lenght, focal_lenght))
 
     #test_undistortion(intrinsic_MatrixL, intrinsic_MatrixR)
 
@@ -411,7 +411,7 @@ def extrinsic_calibration(intrinsic_MatrixL, intrinsic_MatrixR, points):
     #Calcula baseline a partir da matriz de translacao entre as cameras
     #print("T = ", T)
     baseline = ((T[0] ** 2) + (T[1] ** 2) + (T[2] ** 2)) ** (1/2)
-    #print("baseline = {}mm".format(baseline[0])) 
+    print("baseline = {}mm".format(baseline[0])) 
     baseline = baseline[0]
 
     return ((rms_stereo, camera_matrix_l, dist_coeffs_l, camera_matrix_r, dist_coeffs_r, R, T, E, F), baseline)
