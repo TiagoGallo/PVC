@@ -40,7 +40,7 @@ visualize_train_images = False
 
 #Bool que determina se devemos rodar o algoritmo mais rapido, mas perdendo qualidade
 #Caso seja true, nao vai classificar todos os pixels da imagem de treino, vai pular jumpNum pixels para cada classificacao
-Run_Faster = True
+Run_Faster = False
 jumpNum = 100
 
 #Define the train directories paths
@@ -157,7 +157,7 @@ for w in range(og_img_test.shape[0]):
             classified[w][h][:] = (255,255,255)
 
         #Print para acompanhar o processo de teste
-        if Num_processado == 0 or Num_processado % int(Num_a_processar / 10000) == 0:
+        if Num_processado == 0 or Num_processado % int(Num_a_processar / 100) == 0:
             print("Passo demorou: {:.2f}seg.\tJa foram processados {} pontos de um total de {} pontos ===> {:.2f}%".format(time.time() - start_time,Num_processado, Num_a_processar, (Num_processado/Num_a_processar)*100))
             start_time = time.time()
         
