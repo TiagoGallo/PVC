@@ -121,8 +121,8 @@ knn = cv2.ml.KNearest_create()
 knn.train(finalData, cv2.ml.ROW_SAMPLE, finalLabels)
 
 #le a primeira imagem da lista de imagens de teste para usar elas para classificar
-og_img_test = cv2.imread(original_Test_list[0])
-gt_img_test = cv2.imread(gt_Test_list[0])
+og_img_test = cv2.imread('./SkinDataset/ORI/test/278.jpg')
+gt_img_test = cv2.imread('./SkinDataset/GT/test/278.jpg')
 
 #cria uma imagem de classificacao com as mesmas dimensoes que a imagem de teste
 classified = og_img_test.copy()
@@ -160,10 +160,16 @@ for w in range(og_img_test.shape[0]):
         if Num_processado == 0 or Num_processado % int(Num_a_processar / 100) == 0:
             print("Passo demorou: {:.2f}seg.\tJa foram processados {} pontos de um total de {} pontos ===> {:.2f}%".format(time.time() - start_time,Num_processado, Num_a_processar, (Num_processado/Num_a_processar)*100))
             start_time = time.time()
-        
+
         #incrementa os contadores
         Num_processado +=1
         i += 1
+
+#Pega o nome da imagem e prepara o nome para escrever ela
+finalPath = './SkinDataset/Masked/knn/278.jpg'
+#imageName = original_Test_list[0].split('/')[-1]
+#finalPath += imageName
+cv2.imwrite(finalPath, classified)
 
 #Mostra os resultados na tela
 print("Aperte qualquer tecla para sair")
@@ -171,9 +177,3 @@ cv2.imshow("imagem original", og_img_test)
 cv2.imshow("Ground Truth", gt_img_test)
 cv2.imshow("Classified", classified)
 cv2.waitKey(0)
-
-#Pega o nome da imagem e prepara o nome para escrever ela
-finalPath = './SkinDataset/Masked/knn/'
-imageName = original_Test_list[0].split('/')[-1]
-finalPath += imageName
-cv2.imwrite(finalPath, classified)

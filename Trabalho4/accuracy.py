@@ -43,8 +43,8 @@ def BasicAccuracy(imageFile, GroundTruthFile):
 
 
 if __name__ == '__main__':
-    imageFile = './SkinDataset/Masked/knn/243.jpg'
-    GroundTruthFile = './SkinDataset/GT/test/243.jpg'
+    imageFile = './SkinDataset/Masked/knn/278.jpg'
+    GroundTruthFile = './SkinDataset/GT/test/278.jpg'
 
     Jac_acc = JaccardIndex(imageFile, GroundTruthFile)
     Bas_acc = BasicAccuracy(imageFile, GroundTruthFile)
