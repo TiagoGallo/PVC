@@ -197,6 +197,21 @@ if __name__ == '__main__':
         accuracy_mean += accuracy
         # print("Accuracy: {}".format(accuracy))
 
+        # save req 1 pictures
+        if args['req'] == 1:
+
+            # saves the mask to a file
+            img_id = os.path.split(img_path)[-1].split('.')[0]
+            # mask_path = "{}_{}.jpg".format(img_id, args['method'])
+            # cv2.imwrite(mask_path, skin_mask)
+            # print('Saved mask to {}'.format(mask_path))
+
+            # get montage of original image, mask and ground truth
+            montage = np.hstack((img, cv2.cvtColor(skin_mask, cv2.COLOR_GRAY2BGR), cv2.cvtColor(gt_mask, cv2.COLOR_GRAY2BGR)))
+            montage_path = "{}_{}_montage.jpg".format(img_id, args['method'])
+            cv2.imwrite(montage_path, montage)
+            print('Saved montage to {}'.format(montage_path))
+
         # if working on whole set, show progress
         if args['req'] == 2:
             prog_counter += 1
