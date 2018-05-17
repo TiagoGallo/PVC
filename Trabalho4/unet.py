@@ -150,7 +150,7 @@ def get_unet_1class(image_height, image_width):
     return model
 
 train_mode = False
-visualize = False
+visualize = True
 
 batch_size = 2
 data_path = './dataset/big/'
@@ -208,7 +208,7 @@ else:
 
     resized = False
     model = get_unet_1class(image_height, image_width)
-    model.load_weights('./weights/peso2.h5', by_name=False)
+    model.load_weights('./weights/peso3.h5', by_name=False)
 
     for imagePath in testImages:
 
@@ -247,6 +247,7 @@ else:
         cv2.imwrite(imagepathout, imgMask)
 
         if visualize:
+            print("Aperte qualquer tecla para passar pra proxima imagem ou 'q' para sair")
             cv2.imshow('mask' ,imgMask)
             k = cv2.waitKey(0)
 
