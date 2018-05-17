@@ -1,4 +1,22 @@
 import cv2
+import os
+
+def create_imageList_fromDirectory(path):
+    '''
+    Recebe o path para um diretorio especifico, coloca todos os arquivos com fim .jpg
+dele em uma lista e retorna essa lista.
+    '''
+    filelist=os.listdir(path)
+    for fichier in filelist[:]:
+        if not(fichier.endswith(".jpg")):
+            filelist.remove(fichier)
+
+    aux = []
+    for imageName in filelist:
+        imagePath = path + imageName
+        aux.append(imagePath)
+
+    return aux
 
 def JaccardIndex(imageFile, GroundTruthFile):
     maskImage = cv2.imread(imageFile)
@@ -43,10 +61,26 @@ def BasicAccuracy(imageFile, GroundTruthFile):
 
 
 if __name__ == '__main__':
-    imageFile = './SkinDataset/Masked/knn/278.jpg'
-    GroundTruthFile = './SkinDataset/GT/test/278.jpg'
+    imgPath = './SkinDataset/Masked/knn/'
+    imagesPaths = create_imageList_fromDirectory(imgPath)
 
-    Jac_acc = JaccardIndex(imageFile, GroundTruthFile)
-    Bas_acc = BasicAccuracy(imageFile, GroundTruthFile)
+    maskPath = './SkinDataset/GT/test/'
+    maskPaths = create_imageList_fromDirectory(maskPath)
+
+    Jac_acc = 0
+    Bas_acc = 0
+
+    print("Total de imgs = ", len(maskPaths))
+    i = 0
+    for image, maks in zip(imagesPaths, maskPaths):
+        Jac_acc += JaccardIndex(image, maks)
+        Bas_acc += BasicAccuracy(image, maks)
+
+        i += 1
+        print("Processando imagem {}\n image = {} \n mask = {}\nA acuracia foi de {:.2f}% usando Jaccard index e {:.2f}% usando acuracia basica".format(i, image, maks, Jac_acc * 100, Bas_acc * 100))
+
+    Jac_acc /= len(imagesPaths)
+    Bas_acc /= len(imagesPaths)
+
 
     print("A acuracia foi de {:.2f}% usando Jaccard index e {:.2f}% usando acuracia basica".format(Jac_acc * 100, Bas_acc * 100))
