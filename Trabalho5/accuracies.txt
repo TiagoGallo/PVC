@@ -1,0 +1,11 @@
+val: 1  e test: 20 -> val_loss:------      val_acc:------        test_acc:54% -> (dataset do prof deletando imgs 2 a 5 de treino) [usando a mesma imagem como train e validation]
+val: 3  e test: 20 -> val_loss:1.7356      val_acc:56,86%        test_acc:63% -> (dataset do prof deletando imgs 4 e 5 de treino)
+val: 5  e test: 20 -> val_loss:1.6879      val_acc:63,73%        test_acc:74% -> (dataset do prof)
+val: 10 e test: resto -> val_loss:1.2423      val_acc:72,55%        test_acc:77% -> (dataset original, imgs de train = 1 a 10)
+val: 15 e test: resto -> val_loss:0.9457      val_acc:81,37%        test_acc:81% -> (dataset original, imgs de train = 1 a 15)
+val: 20 e test: resto -> val_loss:0.8783      val_acc:82,60%        test_acc:82% -> (dataset original, imgs de train = 1 a 20)
+val: 30 e test: resto -> val_loss:1.0466      val_acc:83,17%        test_acc:86% -> (dataset original, imgs de train = 1 a 30)
+
+Pesos salvos no drive pq sao muito grandes pro git, segue o link:
+
+https://drive.google.com/drive/folders/1OVIaZ8b90YdV9FrzLBFlfjBpJIVTGJ6v?usp=sharing

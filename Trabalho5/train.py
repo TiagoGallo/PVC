@@ -29,7 +29,7 @@ le, data, labels = load_images_to_memory(args["dataset"])
 # partition the data into training and testing splits using 80% of
 # the data for training and the remaining 20% for testing
 (trainX, testX, trainY, testY) = train_test_split(data,
-    labels, test_size=0.20, stratify=labels, random_state=42)
+    labels, test_size=0.2, stratify=labels, random_state=42)
 
 model = get_inception_with_frozen_layers(102)
 
