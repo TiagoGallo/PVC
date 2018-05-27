@@ -1,16 +1,9 @@
-from imutils import paths
-from random import shuffle
+import imutils
 import cv2
-from keras.preprocessing.image import img_to_array
-import os
+from keras.preprocessing.image import img_to_array,array_to_img
 import numpy as np
-from keras.utils import np_utils
-from sklearn.preprocessing import LabelEncoder
 import argparse
-from keras.applications.inception_v3 import InceptionV3
-from keras.layers import Dense, GlobalAveragePooling2D
-from keras.models import Model
-from utils import get_inception_with_frozen_layers
+from utils import get_inception_with_frozen_layers, load_images_to_memory
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -23,42 +16,32 @@ args = vars(ap.parse_args())
 model = get_inception_with_frozen_layers(102)
 model.load_weights(args["model"])
 
-imgsList = sorted(list(paths.list_images(args["dataset"])))
-shuffle(imgsList)
+le, data, labels = load_images_to_memory(args["dataset"], randomOrder=True)
 
-print("Aperte q para sair")
+font = cv2.FONT_HERSHEY_SIMPLEX
 
-for imagePath in imgsList:
-    data = []
-    labels = []
-    # load the image, pre-process it, and store it in the data list
-    image = cv2.imread(imagePath)
-    #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = cv2.resize(image, (200,200))
-    mostrar = image.copy()
-    image = img_to_array(image)
-    data.append(image)
+print("Aperte 'q' para sair!!")
+for dat, label in zip(data, labels):
+    dats = np.expand_dims(dat, axis=0)
+    pred = model.predict(dats)
+    #print ("pred argmax = {}\t label = {}\t le classes = {}".format(pred.argmax(axis=1), label.argmax(axis=0), le.classes_[pred.argmax(axis=1)[0]]))
 
-    # extract the class label from the image path and update the
-    # labels list
-    label = imagePath.split(os.path.sep)[-2]
-    labels.append(label)
+    predito = pred.argmax(axis=1)[0]
+    verdade = label.argmax(axis=0)
+    classe = le.classes_[predito]
 
-    # scale the raw pixel intensities to the range [0, 1]
-    data = np.array(data, dtype="float") / 255.0
-    labels = np.array(labels)
+    dat = array_to_img(dat)
+    open_cv_image = np.array(dat) 
+    open_cv_image = open_cv_image[:, :, ::-1].copy() 
 
-    # convert the labels from integers to vectors
-    le = LabelEncoder().fit(labels)
-    labels = np_utils.to_categorical(le.transform(labels), 102)
+    open_cv_image = imutils.resize(open_cv_image, width=400)
 
-    predictions = model.predict(data).argmax(axis=1)
-    lab = labels.argmax(axis=1)
-    #print("pred foi = {}\nlab = {}\ntarget name = {}".format(predictions, lab, le.classes_))
+    if predito == verdade:
+        cv2.putText(open_cv_image,'{}: {:.2f}%'.format(classe, pred[0][predito] * 100),(2,30), font, 1,(0,255,0),2,cv2.LINE_AA)
+    else:
+        cv2.putText(open_cv_image,'{}: {:.2f}%'.format(classe, pred[0][predito] * 100),(2,30), font, 1,(0,0,255),2,cv2.LINE_AA)
 
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    cv2.putText(mostrar,le.classes_[0],(5,180), font, 1,(0,0,255),2,cv2.LINE_AA)
-    cv2.imshow("image", mostrar)
+    cv2.imshow("teste", open_cv_image)
     k = cv2.waitKey(0)
 
     if k == ord('q'):
