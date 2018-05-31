@@ -19,8 +19,8 @@ model.load_weights(args["model"])
 le, data, labels = load_images_to_memory(args["dataset"], randomOrder=True)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-
-print("Aperte 'q' para sair!!")
+num = 0
+print("Aperte 'q' para sair!!\nOu qualquer tecla para proxima imagem!!")
 for dat, label in zip(data, labels):
     dats = np.expand_dims(dat, axis=0)
     pred = model.predict(dats)
@@ -32,7 +32,7 @@ for dat, label in zip(data, labels):
 
     dat = array_to_img(dat)
     open_cv_image = np.array(dat) 
-    open_cv_image = open_cv_image[:, :, ::-1].copy() 
+    #open_cv_image = open_cv_image[:, :, ::-1].copy() 
 
     open_cv_image = imutils.resize(open_cv_image, width=400)
 

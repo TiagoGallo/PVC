@@ -17,8 +17,6 @@ from utils import load_images_to_memory,\
 ap = argparse.ArgumentParser()
 ap.add_argument("-d", "--dataset", required=True,
     help="path to input training dataset")
-#ap.add_argument("-m", "--model", required=True,
-#    help="path to output model")
 args = vars(ap.parse_args())
 
 n_epochs = 40
