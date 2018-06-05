@@ -19,9 +19,11 @@ model.load_weights(args["model"])
 le, data, labels = load_images_to_memory(args["dataset"], randomOrder=True)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-
-print("Aperte 'q' para sair!!")
+num = 0
+print("Aperte 'q' para sair!!\nOu qualquer tecla para proxima imagem!!")
 for dat, label in zip(data, labels):
+    #if le.classes_[label.argmax(axis=0)] != 'Faces':
+    #    continue
     dats = np.expand_dims(dat, axis=0)
     pred = model.predict(dats)
     #print ("pred argmax = {}\t label = {}\t le classes = {}".format(pred.argmax(axis=1), label.argmax(axis=0), le.classes_[pred.argmax(axis=1)[0]]))
@@ -32,7 +34,7 @@ for dat, label in zip(data, labels):
 
     dat = array_to_img(dat)
     open_cv_image = np.array(dat) 
-    open_cv_image = open_cv_image[:, :, ::-1].copy() 
+    #open_cv_image = open_cv_image[:, :, ::-1].copy() 
 
     open_cv_image = imutils.resize(open_cv_image, width=400)
 
