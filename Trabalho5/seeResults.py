@@ -19,8 +19,8 @@ model.load_weights(args["model"])
 le, data, labels = load_images_to_memory(args["dataset"], randomOrder=True)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-
-print("Aperte 'q' para sair!!")
+num = 0
+print("Aperte 'q' para sair!!\nOu qualquer tecla para proxima imagem!!")
 for dat, label in zip(data, labels):
     #if le.classes_[label.argmax(axis=0)] != 'Faces':
     #    continue
