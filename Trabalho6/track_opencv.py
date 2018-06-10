@@ -3,6 +3,8 @@ import argparse
 from imutils import paths
 import numpy as np
 from kalman import KalmanBoxTracker
+from datasetmanager import get_ground_truth
+import time
 
 #TODO: Adicionar metodos para medir a qualidade dos trackers
 #TODO: Variar alguns parametros do Kalman para dar menos peso pro "sensor"
@@ -76,39 +78,11 @@ def main(args):
 
         k = cv2.waitKey(1)
 
+        print("[DEBUG] ", imagePath)
+
         if k == ord("q"):
             break
 
-
-def get_ground_truth(dataset):
-    '''
-    Recebe o nome do dataset a ser utilizado e retorna uma lista com os bounding boxes de ground truth
-    e uma lista com as imagens referentes a esse dataset
-    '''
-    if dataset == "car1":
-        filename = './data/gtcar1.txt'
-        imagesPath = './data/car1'
-    elif dataset == "car2":
-        filename = './data/gtcar2.txt'
-        imagesPath = './data/car2'
-    else:
-        raise NameError ("There is no {} dataset".format(dataset))
-
-    #Create a list to store the ground truth bounding boxes
-    bounding_boxes = []
-
-    with open(filename) as f:
-        data = f.readlines()
-
-    for i in range(len(data)):
-        data[i] = data[i].replace("\n", "")
-        top, left, bottom, right = data[i].split(",")
-        bb = [float(top), float(left), float(bottom), float(right)]
-        bounding_boxes.append(bb)
-
-    imagesList = sorted(list(paths.list_images(imagesPath)))
-
-    return bounding_boxes, imagesList
 
 def get_tracker(tracker_name):
     '''
