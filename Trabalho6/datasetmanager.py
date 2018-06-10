@@ -6,11 +6,11 @@ def get_ground_truth(dataset):
     e uma lista com as imagens referentes a esse dataset
     '''
     ####################### Dataset Professor ############################
-    if dataset == "car1":
+    if dataset == "Professor_car1":
         filename = './data/Professor/car1/gtcar1.txt'
         imagesPath = './data/Professor/car1'
 
-    elif dataset == "car2":
+    elif dataset == "Professor_car2":
         filename = './data/Professor/car2/gtcar2.txt'
         imagesPath = './data/Professor/car2'
     
@@ -27,55 +27,7 @@ def get_ground_truth(dataset):
         filename = './data/Babenko/surfer/gt.txt'
         imagesPath = './data/Babenko/surfer'
     
-    ################## Dataset BoBot ##########################################
-    elif dataset == "BoBot_Vid_A_ball":
-        filename = './data/BoBot/Vid_A_ball/gt.txt'
-        imagesPath = './data/BoBot/Vid_A_ball'
-    
-    elif dataset == "BoBot_Vid_B_cup":
-        filename = './data/BoBot/Vid_B_cup/gt.txt'
-        imagesPath = './data/BoBot/Vid_B_cup'
-    
-    elif dataset == "BoBot_Vid_C_juice":
-        filename = './data/BoBot/Vid_C_juice/gt.txt'
-        imagesPath = './data/BoBot/Vid_C_juice'
-    
-    elif dataset == "BoBot_Vid_D_person":
-        filename = './data/BoBot/Vid_D_person/gt.txt'
-        imagesPath = './data/BoBot/Vid_D_person'
-    
-    elif dataset == "BoBot_Vid_E_person_part_occluded":
-        filename = './data/BoBot/Vid_E_person_part_occluded/gt.txt'
-        imagesPath = './data/BoBot/Vid_E_person_part_occluded'
-    
-    elif dataset == "BoBot_Vid_F_person_fully_occluded":
-        filename = './data/BoBot/Vid_F_person_fully_occluded/gt.txt'
-        imagesPath = './data/BoBot/Vid_F_person_fully_occluded'
-    
-    elif dataset == "BoBot_Vid_G_rubikscube":
-        filename = './data/BoBot/Vid_G_rubikscube/gt.txt'
-        imagesPath = './data/BoBot/Vid_G_rubikscube'
-    
-    elif dataset == "BoBot_Vid_H_panda":
-        filename = './data/BoBot/Vid_H_panda/gt.txt'
-        imagesPath = './data/BoBot/Vid_H_panda'
-    
-    elif dataset == "BoBot_Vid_I_person_crossing":
-        filename = './data/BoBot/Vid_I_person_crossing/gt.txt'
-        imagesPath = './data/BoBot/Vid_I_person_crossing'
-    
-    elif dataset == "BoBot_Vid_J_person_floor":
-        filename = './data/BoBot/Vid_J_person_floor/gt.txt'
-        imagesPath = './data/BoBot/Vid_J_person_floor'
-    
-    elif dataset == "BoBot_Vid_K_cup":
-        filename = './data/BoBot/Vid_K_cup/gt.txt'
-        imagesPath = './data/BoBot/Vid_K_cup'
-    
-    elif dataset == "BoBot_Vid_L_coffee":
-        filename = './data/BoBot/Vid_L_coffee/gt.txt'
-        imagesPath = './data/BoBot/Vid_L_coffee'
-    
+
     ############################ Dataset Cehovin ###########################
     elif dataset == "Cehovin_dinosaur":
         filename = './data/Cehovin/dinosaur/gt.txt'
@@ -175,10 +127,6 @@ def get_ground_truth(dataset):
     elif dataset == "Kalal_pedestrian5":
         filename = './data/Kalal/pedestrian5/gt.txt'
         imagesPath = './data/Kalal/pedestrian5'
-
-    elif dataset == "Kalal_Volkswagen":
-        filename = './data/Kalal/Volkswagen/gt.txt'
-        imagesPath = './data/Kalal/Volkswagen'
     
     ################## Dataset Kwon ############################
     elif dataset == "Kwon_diving":
