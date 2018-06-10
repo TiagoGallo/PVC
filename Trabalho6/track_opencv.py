@@ -4,6 +4,9 @@ from imutils import paths
 import numpy as np
 from kalman import KalmanBoxTracker
 
+#TODO: Adicionar metodos para medir a qualidade dos trackers
+#TODO: Variar alguns parametros do Kalman para dar menos peso pro "sensor"
+
 def main(args):
 
     bounding_boxes_GT, imagesList = get_ground_truth(args["dataset"])
@@ -32,7 +35,7 @@ def main(args):
         else:
             # Update tracker
             ok, bbox = tracker.update(img)
-            # Draw bounding box
+           
             if ok:
                 # Tracking success
                 p1 = (int(bbox[0]), int(bbox[1]))
@@ -42,18 +45,19 @@ def main(args):
                     cv2.rectangle(img, p1, p2, (0,255,0), 2, 1)
 
                 if useKalman:
-                    bboxkal = kalman.predict()
-                    cv2.rectangle(img, (int(bboxkal[0][0]), int(bboxkal[0][1])), (int(bboxkal[0][2]), int(bboxkal[0][3])), (0,255,0), 2, 1)
+                    bbox_kalman = kalman.predict()
+                    cv2.rectangle(img, (int(bbox_kalman[0][0]), int(bbox_kalman[0][1])), (int(bbox_kalman[0][2]), int(bbox_kalman[0][3])), (0,255,0), 2, 1)
 
                     kalman.update([p1[0],p1[1], p2[0], p2[1]])
 
             else :
                 # Tracking failure
                 if useKalman:
-                    bboxkal = kalman.predict()
-                    cv2.rectangle(img, (int(bboxkal[0][0]), int(bboxkal[0][1])), (int(bboxkal[0][2]), int(bboxkal[0][3])), (0,0,255), 2, 1)
+                    bbox_kalman = kalman.predict()
+                    cv2.rectangle(img, (int(bbox_kalman[0][0]), int(bbox_kalman[0][1])), (int(bbox_kalman[0][2]), int(bbox_kalman[0][3])), (0,0,255), 2, 1)
+
+                #TODO: Reiniciar o tracekr 
                 
-                #cv2.putText(img, "Tracking failure detected", (10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
 
         #Draw ground Truth when it exists
         if not np.isnan(bb[0]):
