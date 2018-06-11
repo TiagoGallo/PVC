@@ -9,11 +9,9 @@ dividida pela uniao entre eles.
     '''
     for value in bbox_gt:
         if np.isnan(value):
-            print("[DEBUG] Jaccard = 0 por causa de NAN no GT")
             return 0.0
     for value in bbox_medido:
         if np.isnan(value):
-            print("[DEBUG] Jaccard = 0 por causa de NAN na Medicao")
             return 0.0
 
     x1_GT, y1_GT, x2_GT, y2_GT = bbox_gt
@@ -32,7 +30,7 @@ dividida pela uniao entre eles.
 
     JaccardIndex = Area_intersecao / Area_Uniao
 
-    print("[DEBUG] Jaccard = {}".format(JaccardIndex))
+    #print("[DEBUG] Jaccard = {}".format(JaccardIndex))
 
     return JaccardIndex
 

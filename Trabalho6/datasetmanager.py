@@ -284,7 +284,7 @@ def get_ground_truth(dataset):
     with open(filename) as f:
         data = f.readlines()
 
-    print("[DEBUG] dataset split = ", dataset.split("_"))
+    #print("[DEBUG] dataset split = ", dataset.split("_"))
 
     for i in range(len(data)):
         data[i] = data[i].replace("\n", "")
