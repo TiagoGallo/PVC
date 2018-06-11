@@ -1,0 +1,300 @@
+
+Tracker = MIL	 Dataset = Professor_car1
+A robustez foi de 0.9090647246984427
+A media do Jaccard foi 0.6335774734495649
+
+
+Tracker = MIL	 Dataset = Professor_car2
+A robustez foi de 0.6570031372840118
+A media do Jaccard foi 0.4644465368625709
+
+
+Tracker = MIL	 Dataset = Babenko_OccludedFace2
+A robustez foi de 0.963815842998345
+A media do Jaccard foi 0.7160915084823224
+
+
+Tracker = MIL	 Dataset = Babenko_surfer
+A robustez foi de 0.9649569217986033
+A media do Jaccard foi 0.4497204186571095
+
+
+Tracker = MIL	 Dataset = Cehovin_dinosaur
+A robustez foi de 0.6912658691495243
+A media do Jaccard foi 0.5564655358424866
+
+
+Tracker = MIL	 Dataset = Cehovin_gymnastics
+A robustez foi de 0.5885841712836407
+A media do Jaccard foi 0.43206632820020535
+
+
+Tracker = MIL	 Dataset = Cehovin_hand
+A robustez foi de 0.47676062866896984
+A media do Jaccard foi 0.6010708026270714
+
+
+Tracker = MIL	 Dataset = Cehovin_hand2
+A robustez foi de 0.258364614136686
+A media do Jaccard foi 0.5588674123297723
+
+
+Tracker = MIL	 Dataset = Cehovin_torus
+A robustez foi de 0.8921968908876757
+A media do Jaccard foi 0.6242320845052615
+
+
+Tracker = MIL	 Dataset = Ellis_ijcv2011_head_motion
+A robustez foi de 1.0
+A media do Jaccard foi 0.6347388635462615
+
+
+Tracker = MIL	 Dataset = Ellis_ijcv2011_track_running
+A robustez foi de 1.0
+A media do Jaccard foi 0.3427185277017442
+
+
+Tracker = MIL	 Dataset = Ellis_ijcv2011_shaking_camera
+A robustez foi de 0.6154886794414411
+A media do Jaccard foi 0.2956584607914148
+
+
+Tracker = MIL	 Dataset = Godec_cliff-dive1
+A robustez foi de 1.0
+A media do Jaccard foi 0.5440445046477113
+
+
+Tracker = MIL	 Dataset = Godec_cliff-dive2
+A robustez foi de 1.0
+A media do Jaccard foi 0.356902411336554
+
+
+Tracker = MIL	 Dataset = Godec_motocross1
+A robustez foi de 0.6920492471401308
+A media do Jaccard foi 0.5083600725233417
+
+
+Tracker = MIL	 Dataset = Godec_motocross2
+A robustez foi de 1.0
+A media do Jaccard foi 0.7088490977137777
+
+
+Tracker = MIL	 Dataset = Godec_mountain-bike
+A robustez foi de 1.0
+A media do Jaccard foi 0.57966266868145
+
+
+Tracker = MIL	 Dataset = Godec_skiing
+A robustez foi de 0.049787068367863944
+A media do Jaccard foi 0.438022729806128
+
+
+Tracker = MIL	 Dataset = Godec_volleyball
+A robustez foi de 0.9416513021714139
+A media do Jaccard foi 0.6724430416744949
+
+
+Tracker = MIL	 Dataset = Kalal_car
+A robustez foi de 0.9090647246984427
+A media do Jaccard foi 0.633106518885307
+
+
+Tracker = MIL	 Dataset = Kalal_CarChase
+A robustez foi de 0.633603941378919
+A media do Jaccard foi 0.42849475792231245
+
+
+Tracker = MIL	 Dataset = Kalal_david
+A robustez foi de 1.0
+A media do Jaccard foi 0.736142271547933
+
+
+Tracker = MIL	 Dataset = Kalal_jumping
+A robustez foi de 0.7494156282712188
+A media do Jaccard foi 0.7109431901997402
+
+
+Tracker = MIL	 Dataset = Kalal_Motocross
+A robustez foi de 0.19101460165435796
+A media do Jaccard foi 0.31265072781883235
+
+
+Tracker = MIL	 Dataset = Kalal_Panda
+A robustez foi de 0.9512135655228049
+A media do Jaccard foi 0.4496418935591375
+
+
+Tracker = MIL	 Dataset = Kalal_pedestrian3
+A robustez foi de 0.42176400445731554
+A media do Jaccard foi 0.5656569326263069
+
+
+Tracker = MIL	 Dataset = Kalal_pedestrian5
+A robustez foi de 0.8487976789195573
+A media do Jaccard foi 0.4140180224412916
+
+
+Tracker = MIL	 Dataset = Kwon_diving
+A robustez foi de 0.5209121273117441
+A media do Jaccard foi 0.4263888037981249
+
+
+Tracker = MIL	 Dataset = Kwon_gym
+A robustez foi de 0.961592522954005
+A media do Jaccard foi 0.4871359296308746
+
+
+Tracker = MIL	 Dataset = Kwon_jump
+A robustez foi de 0.3709323651433022
+A media do Jaccard foi 0.4285064608982893
+
+
+Tracker = MIL	 Dataset = Kwon_trans
+A robustez foi de 1.0
+A media do Jaccard foi 0.5279161476672106
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_animal
+A robustez foi de 0.1800923121479524
+A media do Jaccard foi 0.4283003321371742
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_basketball
+A robustez foi de 1.0
+A media do Jaccard foi 0.6063038950576336
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_football
+A robustez foi de 0.9202568224350588
+A media do Jaccard foi 0.5311641070863059
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_shaking
+A robustez foi de 0.9208873320368396
+A media do Jaccard foi 0.571658574570193
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_singer1
+A robustez foi de 0.9178564384568926
+A media do Jaccard foi 0.4407688164386269
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_singer2
+A robustez foi de 0.9210952933439548
+A media do Jaccard foi 0.5835962887965443
+
+
+Tracker = MIL	 Dataset = Kwon_VTD_skating2
+A robustez foi de 0.8436887167880731
+A media do Jaccard foi 0.5752558118070521
+
+
+Tracker = MIL	 Dataset = Other_Asada
+A robustez foi de 0.7967034698934615
+A media do Jaccard foi 0.5933908214336485
+
+
+Tracker = MIL	 Dataset = Other_drunk2
+A robustez foi de 0.9836515932942931
+A media do Jaccard foi 0.25460489681158316
+
+
+Tracker = MIL	 Dataset = Other_dudek-face
+A robustez foi de 0.9741170809751881
+A media do Jaccard foi 0.7023533785576022
+
+
+Tracker = MIL	 Dataset = Other_faceocc1
+A robustez foi de 1.0
+A media do Jaccard foi 0.6113034110761115
+
+
+Tracker = MIL	 Dataset = Other_figure_skating
+A robustez foi de 0.9529869270548766
+A media do Jaccard foi 0.5635693557746858
+
+
+Tracker = MIL	 Dataset = Other_woman
+A robustez foi de 1.0
+A media do Jaccard foi 0.5489302145266997
+
+
+Tracker = MIL	 Dataset = PROST_board
+A robustez foi de 0.8788642582821151
+A media do Jaccard foi 0.6300844251032575
+
+
+Tracker = MIL	 Dataset = PROST_box
+A robustez foi de 0.9017226623630116
+A media do Jaccard foi 0.5896709269382356
+
+
+Tracker = MIL	 Dataset = PROST_lemming
+A robustez foi de 0.8937228611678794
+A media do Jaccard foi 0.6249617892710814
+
+
+Tracker = MIL	 Dataset = PROST_liquor
+A robustez foi de 0.7992048916091276
+A media do Jaccard foi 0.7536903045439483
+
+
+Tracker = MIL	 Dataset = Ross_car11
+A robustez foi de 0.9263245569805906
+A media do Jaccard foi 0.511810254731822
+
+
+Tracker = MIL	 Dataset = Ross_dog1
+A robustez foi de 1.0
+A media do Jaccard foi 0.5702884361448765
+
+
+Tracker = MIL	 Dataset = Ross_Sylvestr
+A robustez foi de 0.9779095976664013
+A media do Jaccard foi 0.5971145636617594
+
+
+Tracker = MIL	 Dataset = Ross_trellis
+A robustez foi de 0.8095573957713693
+A media do Jaccard foi 0.5098118163705804
+
+
+Tracker = MIL	 Dataset = Thang_coke
+A robustez foi de 0.9017226623630116
+A media do Jaccard foi 0.5576668224494972
+
+
+Tracker = MIL	 Dataset = Thang_person
+A robustez foi de 0.8337529180751806
+A media do Jaccard foi 0.6565132749701674
+
+
+Tracker = MIL	 Dataset = Thang_tiger1
+A robustez foi de 0.23580284944328034
+A media do Jaccard foi 0.5842413529073007
+
+
+Tracker = MIL	 Dataset = Thang_tiger2
+A robustez foi de 0.438596324030964
+A media do Jaccard foi 0.5404813343367348
+
+
+Tracker = MIL	 Dataset = Wang_bird_1
+A robustez foi de 0.11793848103901411
+A media do Jaccard foi 0.5182948084579108
+
+
+Tracker = MIL	 Dataset = Wang_bird_2
+A robustez foi de 0.3991702158434836
+A media do Jaccard foi 0.5838488714348986
+
+
+Tracker = MIL	 Dataset = Wang_bolt
+A robustez foi de 0.6506395824125631
+A media do Jaccard foi 0.6628323501565618
+
+
+Tracker = MIL	 Dataset = Wang_girl_mov
+A robustez foi de 0.9417268386268379
+A media do Jaccard foi 0.6377253536248052
+
