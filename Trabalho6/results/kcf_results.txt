@@ -241,3 +241,4 @@ A media do Jaccard foi 0.8025220552293474
 Tracker = KCF	 Dataset = Wang_girl_mov
 A robustez foi de 0.802401025327225
 A media do Jaccard foi 0.7058408402960088
+
