@@ -1,0 +1,243 @@
+Tracker = KCF	 Dataset = Professor_car1
+A robustez foi de 0.8005489275962904
+A media do Jaccard foi 0.7986145486787103
+
+Tracker = KCF	 Dataset = Professor_car2
+A robustez foi de 0.4038877388818604
+A media do Jaccard foi 0.6778060546721617
+
+Tracker = KCF	 Dataset = Babenko_OccludedFace2
+A robustez foi de 1.0
+A media do Jaccard foi 0.7599083882125898
+
+Tracker = KCF	 Dataset = Babenko_surfer
+A robustez foi de 0.36831713230505486
+A media do Jaccard foi 0.5268970927064399
+
+Tracker = KCF	 Dataset = Cehovin_dinosaur
+A robustez foi de 0.22833919072129022
+A media do Jaccard foi 0.6686952534999643
+
+Tracker = KCF	 Dataset = Cehovin_gymnastics
+A robustez foi de 0.06353376732130173
+A media do Jaccard foi 0.6786527244309407
+
+Tracker = KCF	 Dataset = Cehovin_hand
+A robustez foi de 0.001272633801339809
+A media do Jaccard foi 0.6960772572828019
+
+Tracker = KCF	 Dataset = Cehovin_hand2
+A robustez foi de 0.0010284533079322642
+A media do Jaccard foi 0.539869610986346
+
+Tracker = KCF	 Dataset = Cehovin_torus
+A robustez foi de 0.10214429369527712
+A media do Jaccard foi 0.7763982770286088
+
+Tracker = KCF	 Dataset = Ellis_ijcv2011_head_motion
+A robustez foi de 1.0
+A media do Jaccard foi 0.701539556208961
+
+Tracker = KCF	 Dataset = Ellis_ijcv2011_track_running
+A robustez foi de 1.0
+A media do Jaccard foi 0.34170816341388205
+
+Tracker = KCF	 Dataset = Ellis_ijcv2011_shaking_camera
+A robustez foi de 0.3255153032511281
+A media do Jaccard foi 0.7935633167223014
+
+Tracker = KCF	 Dataset = Godec_cliff-dive1
+A robustez foi de 0.6703200460356393
+A media do Jaccard foi 0.7375992854907089
+
+Tracker = KCF	 Dataset = Godec_cliff-dive2
+A robustez foi de 0.0001472278145815448
+A media do Jaccard foi 0.6903566461624422
+
+Tracker = KCF	 Dataset = Godec_motocross1
+A robustez foi de 0.09138827995478023
+A media do Jaccard foi 0.5534990001622694
+
+Tracker = KCF	 Dataset = Godec_motocross2
+A robustez foi de 0.0010937076750024526
+A media do Jaccard foi 0.8255674635466989
+
+Tracker = KCF	 Dataset = Godec_mountain-bike
+A robustez foi de 0.20476279165386843
+A media do Jaccard foi 0.8691274043627512
+
+Tracker = KCF	 Dataset = Godec_skiing
+A robustez foi de 0.00017956020542583297
+A media do Jaccard foi 0.661315837532111
+
+Tracker = KCF	 Dataset = Godec_volleyball
+A robustez foi de 0.5161681753963759
+A media do Jaccard foi 0.7454583944315956
+
+Tracker = KCF	 Dataset = Kalal_car
+A robustez foi de 0.8005489275962904
+A media do Jaccard foi 0.7986145486787103
+
+Tracker = KCF	 Dataset = Kalal_CarChase
+A robustez foi de 0.4038877388818604
+A media do Jaccard foi 0.6778060546721617
+
+Tracker = KCF	 Dataset = Kalal_david
+A robustez foi de 0.791306247576083
+A media do Jaccard foi 0.7735872904990788
+
+Tracker = KCF	 Dataset = Kalal_jumping
+A robustez foi de 0.0002327874819175414
+A media do Jaccard foi 0.475883015985405
+
+Tracker = KCF	 Dataset = Kalal_Motocross
+A robustez foi de 0.005084637543694638
+A media do Jaccard foi 0.20445539962732168
+
+Tracker = KCF	 Dataset = Kalal_Panda
+A robustez foi de 0.25399090519091405
+A media do Jaccard foi 0.6727358671398244
+
+Tracker = KCF	 Dataset = Kalal_pedestrian3
+A robustez foi de 8.678374998326171e-06
+A media do Jaccard foi 0.5234030766669273
+
+Tracker = KCF	 Dataset = Kalal_pedestrian4
+A robustez foi de 0.015237797485334848
+A media do Jaccard foi 0.5267471254827909
+
+Tracker = KCF	 Dataset = Kalal_pedestrian5
+A robustez foi de 0.10075313447618768
+A media do Jaccard foi 0.43140470186751034
+
+Tracker = KCF	 Dataset = Kwon_diving
+A robustez foi de 0.007037363096522365
+A media do Jaccard foi 0.7498170277343169
+
+Tracker = KCF	 Dataset = Kwon_gym
+A robustez foi de 0.961592522954005
+A media do Jaccard foi 0.617250619881033
+
+Tracker = KCF	 Dataset = Kwon_jump
+A robustez foi de 0.001238053518270857
+A media do Jaccard foi 0.6989033241333518
+
+Tracker = KCF	 Dataset = Kwon_trans
+A robustez foi de 1.0
+A media do Jaccard foi 0.5465812751415614
+
+Tracker = KCF	 Dataset = Kwon_VTD_animal
+A robustez foi de 8.039396646431872e-05
+A media do Jaccard foi 0.43060332959655534
+
+Tracker = KCF	 Dataset = Kwon_VTD_basketball
+A robustez foi de 0.042887654398680496
+A media do Jaccard foi 0.7533679939570572
+
+Tracker = KCF	 Dataset = Kwon_VTD_football
+A robustez foi de 0.2874985690076302
+A media do Jaccard foi 0.7252102681906692
+
+Tracker = KCF	 Dataset = Kwon_VTD_shaking
+A robustez foi de 0.01762456628620392
+A media do Jaccard foi 0.7618180471720094
+
+Tracker = KCF	 Dataset = Kwon_VTD_singer1
+A robustez foi de 0.9178564384568926
+A media do Jaccard foi 0.4369605721592705
+
+Tracker = KCF	 Dataset = Kwon_VTD_singer2
+A robustez foi de 0.37295356046545525
+A media do Jaccard foi 0.7488178152690949
+
+Tracker = KCF	 Dataset = Kwon_VTD_skating2
+A robustez foi de 0.3042815972113923
+A media do Jaccard foi 0.686928959279331
+
+Tracker = KCF	 Dataset = Other_Asada
+A robustez foi de 0.48322508118982543
+A media do Jaccard foi 0.6323067867383918
+
+Tracker = KCF	 Dataset = Other_drunk2
+A robustez foi de 0.9517522216430955
+A media do Jaccard foi 0.2396379493075116
+
+Tracker = KCF	 Dataset = Other_dudek-face
+A robustez foi de 0.9489040874476212
+A media do Jaccard foi 0.6855445168120293
+
+Tracker = KCF	 Dataset = Other_faceocc1
+A robustez foi de 0.8461675732056362
+A media do Jaccard foi 0.7992330633313021
+
+Tracker = KCF	 Dataset = Other_figure_skating
+A robustez foi de 0.9529869270548766
+A media do Jaccard foi 0.5305399004363289
+
+Tracker = KCF	 Dataset = Other_woman
+A robustez foi de 0.02536216850249537
+A media do Jaccard foi 0.8054220128090795
+
+Tracker = KCF	 Dataset = PROST_board
+A robustez foi de 0.8788642582821151
+A media do Jaccard foi 0.6705893810162407
+
+Tracker = KCF	 Dataset = PROST_box
+A robustez foi de 0.6962343500239325
+A media do Jaccard foi 0.6464443681394444
+
+Tracker = KCF	 Dataset = PROST_lemming
+A robustez foi de 0.6379864703263795
+A media do Jaccard foi 0.6179842265764113
+
+Tracker = KCF	 Dataset = PROST_liquor
+A robustez foi de 0.7459449699846689
+A media do Jaccard foi 0.8316963003354402
+
+Tracker = KCF	 Dataset = Ross_car11
+A robustez foi de 0.8580771848652875
+A media do Jaccard foi 0.8393833113508221
+
+Tracker = KCF	 Dataset = Ross_dog1
+A robustez foi de 1.0
+A media do Jaccard foi 0.5804474065729373
+
+Tracker = KCF	 Dataset = Ross_Sylvestr
+A robustez foi de 0.3742339425341848
+A media do Jaccard foi 0.8073042312432921
+
+Tracker = KCF	 Dataset = Ross_trellis
+A robustez foi de 0.07516811286420158
+A media do Jaccard foi 0.8075877387999031
+
+Tracker = KCF	 Dataset = Thang_coke
+A robustez foi de 0.024133896544913325
+A media do Jaccard foi 0.6162695701113509
+
+Tracker = KCF	 Dataset = Thang_person
+A robustez foi de 0.16232061118184815
+A media do Jaccard foi 0.8042409181350115
+
+Tracker = KCF	 Dataset = Thang_tiger1
+A robustez foi de 0.000564961177777696
+A media do Jaccard foi 0.5905710104895501
+
+Tracker = KCF	 Dataset = Thang_tiger2
+A robustez foi de 0.0007082260378335187
+A media do Jaccard foi 0.6495608154521901
+
+Tracker = KCF	 Dataset = Wang_bird_1
+A robustez foi de 0.0003489129964473146
+A media do Jaccard foi 0.7669157294847948
+
+Tracker = KCF	 Dataset = Wang_bird_2
+A robustez foi de 0.0029785265989675383
+A media do Jaccard foi 0.7977241373700894
+
+Tracker = KCF	 Dataset = Wang_bolt
+A robustez foi de 0.002436501750877691
+A media do Jaccard foi 0.8025220552293474
+
+Tracker = KCF	 Dataset = Wang_girl_mov
+A robustez foi de 0.802401025327225
+A media do Jaccard foi 0.7058408402960088

@@ -9,7 +9,7 @@ import sys
 
 
 def main(args):
-
+    print()
     bounding_boxes_GT, imagesList = get_ground_truth(args["dataset"])
 
     tracker = get_tracker(args["tracker"])
@@ -18,7 +18,9 @@ def main(args):
     F = 0
     Jac_values = []
 
-    print("[INFO] Aperte 'q' para sair")
+    print("Tracker = {}\t Dataset = {}".format(args["tracker"], args["dataset"]))
+
+    #print("[INFO] Aperte 'q' para sair")
     for i, imagePath in enumerate(imagesList):
         img = cv2.imread(imagePath)
         
@@ -107,8 +109,8 @@ def main(args):
     Robustness = robustez(F, len(imagesList) - 1)
     Med_Jac = sum(Jac_values)/len(Jac_values)
 
-    print("[INFO] A robustez foi de {}\nA media do Jaccard foi {}".format(Robustness, Med_Jac))
-
+    print("A robustez foi de {}\nA media do Jaccard foi {}".format(Robustness, Med_Jac))
+    print()
 
 def get_tracker(tracker_name):
     '''
