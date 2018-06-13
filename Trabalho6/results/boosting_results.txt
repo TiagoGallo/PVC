@@ -4,6 +4,11 @@ A robustez foi de 0.8806291849701356
 A media do Jaccard foi 0.6130619853357647
 
 
+Tracker = BOOSTING       Dataset = Professor_car2
+A robustez foi de 0.8468655297921748
+A media do Jaccard foi 0.5033200991326916
+
+
 Tracker = BOOSTING	 Dataset = Babenko_OccludedFace2
 A robustez foi de 0.9289409792146105
 A media do Jaccard foi 0.6483333677516221

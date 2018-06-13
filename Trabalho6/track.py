@@ -43,50 +43,40 @@ def main(args):
                 cv2.rectangle(img, p1, p2, (0,255,0), 2, 1)
                 jac = Jaccard(bb, [p1[0], p1[1], p2[0], p2[1]])
                 Jac_values.append(jac)
-                if jac < 0.1: 
+                if jac < 0.1:                     
                     del(tracker)
-                    tracker = get_tracker(args["tracker"])                        
-                    if (np.isnan(bb[0])) or (np.isnan(bb[1])) or (np.isnan(bb[2])) or (np.isnan(bb[3])):
-                        #print("[DEBUG] Vai reiniciar em 0 pq era nan")
+                    tracker = get_tracker(args["tracker"])                      
+                    if (np.isnan(bb[0])) or (np.isnan(bb[1])) or (np.isnan(bb[2])) or (np.isnan(bb[3])):                        
                         bb[0] = 0
                         bb[1] = 0
                         bb[2] = 10
                         bb[3] = 10
                     else:
                         F += 1
-                    if (bb[0] < 0) or (bb[1] < 0) or (bb[2] < 0) or (bb[3] < 0):
-                        #print("[DEBUG] Vai reiniciar em 0 pq era negativo = ", bb)
+                    if (bb[0] < 0) or (bb[1] < 0) or (bb[2] < 0) or (bb[3] < 0):                        
                         if bb[0] < 0.0: bb[0] = 0 
-                        if bb[1] < 0.0: bb[1] = 0
-                        #print("[DEBUG] Novo bb = ", bb)
+                        if bb[1] < 0.0: bb[1] = 0                        
                     
-                    ok = tracker.init(img, (bb[0], bb[1], bb[2] - bb[0], bb[3]-bb[1]))
+                    ok = tracker.init(img, (int(bb[0]), int(bb[1]), int(bb[2]) - int(bb[0]), int(bb[3])-int(bb[1])))
                                                 
                                                 
 
-            else :
+            else :                
                 del(tracker)
-                tracker = get_tracker(args["tracker"])                    
-                if (np.isnan(bb[0])) or (np.isnan(bb[1])) or (np.isnan(bb[2])) or (np.isnan(bb[3])):
-                        #print("[DEBUG] Vai reiniciar em 0 pq era nan")
+                tracker = get_tracker(args["tracker"])                            
+                if (np.isnan(bb[0])) or (np.isnan(bb[1])) or (np.isnan(bb[2])) or (np.isnan(bb[3])):                        
                         bb[0] = 0
                         bb[1] = 0
                         bb[2] = 10
                         bb[3] = 10
                 else:
                     F += 1
-                if (bb[0] < 0) or (bb[1] < 0) or (bb[2] < 0) or (bb[3] < 0):
-                    #print("[DEBUG] Vai reiniciar em 0 pq era negativo = ", bb)
+                if (bb[0] < 0) or (bb[1] < 0) or (bb[2] < 0) or (bb[3] < 0):                    
                     if bb[0] < 0.0: bb[0] = 0 
-                    if bb[1] < 0.0: bb[1] = 0
-                    #print("[DEBUG] Novo bb = ", bb)
+                    if bb[1] < 0.0: bb[1] = 0                    
                 
-                ok = tracker.init(img, (bb[0], bb[1], bb[2] - bb[0], bb[3]-bb[1]))
-
-                    #print("[DEBUG] Reiniciou o tracekr pq o tracker se perdeu {}".format(F))
-
-                
-
+                ok = tracker.init(img, (int(bb[0]), int(bb[1]), int(bb[2]) - int(bb[0]), int(bb[3])-int(bb[1])))
+                    
         #Draw ground Truth when it exists
         if not np.isnan(bb_unchanged[0]):
             cv2.rectangle(img, (int(bb_unchanged[0]), int(bb_unchanged[1])), (int(bb_unchanged[2]), int(bb_unchanged[3])), (255,0,0), 2, 1)
@@ -115,7 +105,7 @@ def main(args):
 def get_tracker(tracker_name):
     '''
     Recebe o nome do tracker que sera utilizado e retorna um objeto do OpenCV 'contendo' o tracker
-    '''
+    '''    
     if tracker_name == 'BOOSTING':
         tracker = cv2.TrackerBoosting_create()
     elif tracker_name == 'MIL':
