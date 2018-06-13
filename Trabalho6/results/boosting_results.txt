@@ -1,0 +1,262 @@
+
+Tracker = BOOSTING	 Dataset = Professor_car1
+A robustez foi de 0.8806291849701356
+A media do Jaccard foi 0.6130619853357647
+
+
+Tracker = BOOSTING	 Dataset = Babenko_OccludedFace2
+A robustez foi de 0.9289409792146105
+A media do Jaccard foi 0.6483333677516221
+
+
+Tracker = BOOSTING	 Dataset = Babenko_surfer
+A robustez foi de 0.9649569217986033
+A media do Jaccard foi 0.3700938269237779
+
+
+Tracker = BOOSTING	 Dataset = Cehovin_dinosaur
+A robustez foi de 0.5747350345627645
+A media do Jaccard foi 0.5028449653601959
+
+
+Tracker = BOOSTING	 Dataset = Cehovin_gymnastics
+A robustez foi de 0.6206227918590037
+A media do Jaccard foi 0.41759891955388606
+
+
+Tracker = BOOSTING	 Dataset = Cehovin_hand
+A robustez foi de 0.4213895691086441
+A media do Jaccard foi 0.5050430899192714
+
+
+Tracker = BOOSTING	 Dataset = Cehovin_hand2
+A robustez foi de 0.07472168291177333
+A media do Jaccard foi 0.49370121297010466
+
+
+Tracker = BOOSTING	 Dataset = Cehovin_torus
+A robustez foi de 0.2851463129398282
+A media do Jaccard foi 0.5457595307105217
+
+
+Tracker = BOOSTING	 Dataset = Ellis_ijcv2011_head_motion
+A robustez foi de 1.0
+A media do Jaccard foi 0.6316573763095643
+
+
+Tracker = BOOSTING	 Dataset = Ellis_ijcv2011_track_running
+A robustez foi de 1.0
+A media do Jaccard foi 0.3323071603664706
+
+
+Tracker = BOOSTING	 Dataset = Godec_cliff-dive1
+A robustez foi de 1.0
+A media do Jaccard foi 0.5978112558114179
+
+
+Tracker = BOOSTING	 Dataset = Godec_cliff-dive2
+A robustez foi de 0.6432791767011972
+A media do Jaccard foi 0.31389461947214226
+
+
+Tracker = BOOSTING	 Dataset = Godec_motocross1
+A robustez foi de 0.5757122901958384
+A media do Jaccard foi 0.5175451901201522
+
+
+Tracker = BOOSTING	 Dataset = Godec_motocross2
+A robustez foi de 0.2557291599131006
+A media do Jaccard foi 0.7189418645060797
+
+
+Tracker = BOOSTING	 Dataset = Godec_mountain-bike
+A robustez foi de 1.0
+A media do Jaccard foi 0.5714875091810631
+
+
+Tracker = BOOSTING	 Dataset = Godec_skiing
+A robustez foi de 0.32465246735834974
+A media do Jaccard foi 0.5623271700724245
+
+
+Tracker = BOOSTING	 Dataset = Godec_volleyball
+A robustez foi de 0.9416513021714139
+A media do Jaccard foi 0.6777124891460561
+
+
+Tracker = BOOSTING	 Dataset = Kalal_car
+A robustez foi de 0.8806291849701356
+A media do Jaccard foi 0.6130619853357647
+
+
+Tracker = BOOSTING	 Dataset = Kalal_david
+A robustez foi de 0.9249427761341461
+A media do Jaccard foi 0.5237993465458792
+
+
+Tracker = BOOSTING	 Dataset = Kalal_Panda
+
+Tracker = BOOSTING	 Dataset = Kwon_diving
+A robustez foi de 0.7703813975921459
+A media do Jaccard foi 0.47291849045639706
+
+
+Tracker = BOOSTING	 Dataset = Kwon_gym
+A robustez foi de 1.0
+A media do Jaccard foi 0.6419988456181535
+
+
+Tracker = BOOSTING	 Dataset = Kwon_jump
+A robustez foi de 0.6090421702503876
+A media do Jaccard foi 0.4187471040313667
+
+
+Tracker = BOOSTING	 Dataset = Kwon_trans
+A robustez foi de 1.0
+A media do Jaccard foi 0.45509793087250844
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_animal
+A robustez foi de 0.2764530466295643
+A media do Jaccard foi 0.65956736174501
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_basketball
+A robustez foi de 0.8472615329652826
+A media do Jaccard foi 0.5638238236792903
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_football
+A robustez foi de 0.7793403055874669
+A media do Jaccard foi 0.6273598923400178
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_shaking
+A robustez foi de 0.8480334783059285
+A media do Jaccard foi 0.5417653103772125
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_singer1
+A robustez foi de 0.9178564384568926
+A media do Jaccard foi 0.4383251784717902
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_singer2
+A robustez foi de 0.8484165394203861
+A media do Jaccard foi 0.5940251009811943
+
+
+Tracker = BOOSTING	 Dataset = Kwon_VTD_skating2
+A robustez foi de 0.6005466145994907
+A media do Jaccard foi 0.5374296341287785
+
+
+Tracker = BOOSTING	 Dataset = Other_Asada
+A robustez foi de 0.5292133415000503
+A media do Jaccard foi 0.5086452951398741
+
+
+Tracker = BOOSTING	 Dataset = Other_drunk2
+A robustez foi de 0.9836515932942931
+A media do Jaccard foi 0.2182841040535921
+
+
+Tracker = BOOSTING	 Dataset = Other_dudek-face
+A robustez foi de 1.0
+A media do Jaccard foi 0.3665554531823466
+
+
+Tracker = BOOSTING	 Dataset = Other_faceocc1
+A robustez foi de 1.0
+A media do Jaccard foi 0.6437672690401364
+
+
+Tracker = BOOSTING	 Dataset = Other_figure_skating
+A robustez foi de 1.0
+A media do Jaccard foi 0.6219646867873934
+
+
+Tracker = BOOSTING	 Dataset = Other_woman
+A robustez foi de 0.8598419278886467
+A media do Jaccard foi 0.7508500660813673
+
+
+Tracker = BOOSTING	 Dataset = PROST_board
+A robustez foi de 0.8788642582821151
+A media do Jaccard foi 0.5936865923325275
+
+
+Tracker = BOOSTING	 Dataset = PROST_box
+A robustez foi de 0.9495907867934543
+A media do Jaccard foi 0.5920204069778884
+
+
+Tracker = BOOSTING	 Dataset = PROST_lemming
+A robustez foi de 0.9140338799377049
+A media do Jaccard foi 0.6267050716154233
+
+
+Tracker = BOOSTING	 Dataset = PROST_liquor
+A robustez foi de 0.7855436050549208
+A media do Jaccard foi 0.6792622034336481
+
+
+Tracker = BOOSTING	 Dataset = Ross_car11
+A robustez foi de 1.0
+A media do Jaccard foi 0.787602282403998
+
+
+Tracker = BOOSTING	 Dataset = Ross_dog1
+A robustez foi de 1.0
+A media do Jaccard foi 0.5605091914947677
+
+
+Tracker = BOOSTING	 Dataset = Ross_Sylvestr
+A robustez foi de 0.9779095976664013
+A media do Jaccard foi 0.5403736435514157
+
+
+Tracker = BOOSTING	 Dataset = Ross_trellis
+A robustez foi de 0.8095573957713693
+A media do Jaccard foi 0.658181058028039
+
+
+Tracker = BOOSTING	 Dataset = Thang_coke
+A robustez foi de 0.8131037598190377
+A media do Jaccard foi 0.5343778948812193
+
+
+Tracker = BOOSTING	 Dataset = Thang_person
+A robustez foi de 0.8337529180751806
+A media do Jaccard foi 0.6033343789128175
+
+
+Tracker = BOOSTING	 Dataset = Thang_tiger1
+A robustez foi de 0.6005466145994907
+A media do Jaccard foi 0.5642377704798499
+
+
+Tracker = BOOSTING	 Dataset = Thang_tiger2
+A robustez foi de 0.4762757709576335
+A media do Jaccard foi 0.5869800889654262
+
+
+Tracker = BOOSTING	 Dataset = Wang_bird_1
+A robustez foi de 0.24647581584090367
+A media do Jaccard foi 0.5175287990826439
+
+
+Tracker = BOOSTING	 Dataset = Wang_bird_2
+A robustez foi de 0.7362964551863367
+A media do Jaccard foi 0.6045365899953666
+
+
+Tracker = BOOSTING	 Dataset = Wang_bolt
+A robustez foi de 0.547868930967712
+A media do Jaccard foi 0.6098848202463428
+
+
+Tracker = BOOSTING	 Dataset = Wang_girl_mov
+A robustez foi de 0.9230670819856235
+A media do Jaccard foi 0.6440876737584236
+
