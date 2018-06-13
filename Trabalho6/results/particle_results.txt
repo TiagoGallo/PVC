@@ -1,0 +1,244 @@
+Tracker = Template Matcher + Particle Filtering	 Dataset = Professor_car1
+A robustez foi de 0.9384815675375165
+A media do Jaccard foi 0.8551332315856713
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Professor_car2
+A robustez foi de 0.7781734767959738
+A media do Jaccard foi 0.6893031900296671
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Babenko_OccludedFace2
+A robustez foi de 0.8018298139383734
+A media do Jaccard foi 0.7063431130695715
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Babenko_surfer
+A robustez foi de 0.6292775284676344
+A media do Jaccard foi 0.48910646072623565
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Cehovin_dinosaur
+A robustez foi de 0.6312061921427502
+A media do Jaccard foi 0.39302077814063546
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Cehovin_gymnastics
+A robustez foi de 0.5587737759015512
+A media do Jaccard foi 0.49861817398677755
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Cehovin_hand
+A robustez foi de 0.258603567735103
+A media do Jaccard foi 0.5296304201150321
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Cehovin_hand2
+A robustez foi de 0.13232795764576497
+A media do Jaccard foi 0.46667681522838605
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Cehovin_torus
+A robustez foi de 0.5056967074374725
+A media do Jaccard foi 0.6688859534199805
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ellis_ijcv2011_head_motion
+A robustez foi de 0.9624418961243592
+A media do Jaccard foi 0.8265438129187749
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ellis_ijcv2011_track_running
+A robustez foi de 0.7421449269210502
+A media do Jaccard foi 0.6301657156160473
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ellis_ijcv2011_shaking_camera
+A robustez foi de 0.8337529180751806
+A media do Jaccard foi 0.4847430443470314
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_cliff-dive1
+A robustez foi de 0.6738573467986401
+A media do Jaccard foi 0.7026957863925514
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_cliff-dive2
+A robustez foi de 1.0
+A media do Jaccard foi 0.3269041185285082
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_motocross1
+A robustez foi de 0.2314446251820375
+A media do Jaccard foi 0.42196462162552967
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_motocross2
+A robustez foi de 0.2713494443804466
+A media do Jaccard foi 0.5931240400221557
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_mountain-bike
+A robustez foi de 0.5907775139012317
+A media do Jaccard foi 0.5137364881465057
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_skiing
+A robustez foi de 0.1569462558207136
+A media do Jaccard foi 0.46934414885507
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Godec_volleyball
+A robustez foi de 0.6187833918061408
+A media do Jaccard foi 0.5968556491541085
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_car
+A robustez foi de 0.8807476526076742
+A media do Jaccard foi 0.6989966802954878
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_CarChase
+A robustez foi de 0.7688242890527359
+A media do Jaccard foi 0.7106841208278804
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_david
+A robustez foi de 0.7322097138745852
+A media do Jaccard foi 0.5660262014033048
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_jumping
+A robustez foi de 0.10022681725966041
+A media do Jaccard foi 0.48506953949105847
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_Motocross
+A robustez foi de 0.1543291040584583
+A media do Jaccard foi 0.45231920738269965
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_Panda
+A robustez foi de 0.6636502501363194
+A media do Jaccard foi 0.593030090196672
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_pedestrian3
+A robustez foi de 0.04018402645107363
+A media do Jaccard foi 0.5549683707313177
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_pedestrian4
+A robustez foi de 0.5871092393909064
+A media do Jaccard foi 0.6541832510163369
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kalal_pedestrian5
+A robustez foi de 0.6131593444719887
+A media do Jaccard foi 0.7256981927018746
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_diving
+A robustez foi de 0.4587633499993392
+A media do Jaccard foi 0.3966252306829588
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_gym
+A robustez foi de 0.8892825305353766
+A media do Jaccard foi 0.6463616231732828
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_jump
+A robustez foi de 0.37395995579118924
+A media do Jaccard foi 0.4229904612146933
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_trans
+A robustez foi de 0.7851068279713449
+A media do Jaccard foi 0.557145111789176
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_animal
+A robustez foi de 0.009581823851665143
+A media do Jaccard foi 0.37306684825176994
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_basketball
+A robustez foi de 0.5602846365511668
+A media do Jaccard foi 0.5934647833766339
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_football
+A robustez foi de 0.608208475130269
+A media do Jaccard foi 0.5586745648570604
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_shaking
+A robustez foi de 0.47724464957022916
+A media do Jaccard foi 0.43836954931973193
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_singer1
+A robustez foi de 0.6522349512104066
+A media do Jaccard foi 0.7732997589465485
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_singer2
+A robustez foi de 0.7204574997392279
+A media do Jaccard foi 0.6232327010136824
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Kwon_VTD_skating2
+A robustez foi de 0.5291452973546603
+A media do Jaccard foi 0.5442693093335039
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Other_Asada
+A robustez foi de 0.5543188986060402
+A media do Jaccard foi 0.5177033059580276
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Other_drunk2
+A robustez foi de 0.9209290118968886
+A media do Jaccard foi 0.7283292240112236
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Other_dudek-face
+A robustez foi de 0.8109028788071992
+A media do Jaccard foi 0.6985117990738249
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Other_faceocc1
+A robustez foi de 0.7916840599348226
+A media do Jaccard foi 0.718575978383381
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Other_figure_skating
+A robustez foi de 0.6807123983233854
+A media do Jaccard foi 0.5631113957521067
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Other_woman
+A robustez foi de 0.49484158994713145
+A media do Jaccard foi 0.5922377804093598
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = PROST_board
+A robustez foi de 0.7090426908152501
+A media do Jaccard foi 0.5511501488989968
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = PROST_box
+A robustez foi de 0.5663882668092274
+A media do Jaccard foi 0.5854354540348822
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = PROST_lemming
+A robustez foi de 0.5214209464625089
+A media do Jaccard foi 0.5970121034575755
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = PROST_liquor
+A robustez foi de 0.8132003929956247
+A media do Jaccard foi 0.7829542898686997
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ross_car11
+A robustez foi de 0.795322462318087
+A media do Jaccard foi 0.7422485290892157
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ross_dog1
+A robustez foi de 0.8374584805137947
+A media do Jaccard foi 0.7006272476832016
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ross_Sylvestr
+A robustez foi de 0.5473435719609872
+A media do Jaccard foi 0.6352809660497455
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Ross_trellis
+A robustez foi de 0.5599180469944608
+A media do Jaccard foi 0.5745041608292883
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Thang_coke
+A robustez foi de 0.19214892893751995
+A media do Jaccard foi 0.5407490216323113
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Thang_person
+A robustez foi de 0.6356086689322047
+A media do Jaccard foi 0.6987813934134696
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Thang_tiger1
+A robustez foi de 0.13082453186177545
+A media do Jaccard foi 0.4237691094717341
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Thang_tiger2
+A robustez foi de 0.15100973728667122
+A media do Jaccard foi 0.43600847848946556
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Wang_bird_1
+A robustez foi de 0.17123714294478817
+A media do Jaccard foi 0.4357238327544354
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Wang_bird_2
+A robustez foi de 0.5454955638202434
+A media do Jaccard foi 0.5742956449052503
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Wang_bolt
+A robustez foi de 0.4623520933081963
+A media do Jaccard foi 0.5980800673996848
+
+Tracker = Template Matcher + Particle Filtering	 Dataset = Wang_girl_mov
+A robustez foi de 0.7261490370736909
+A media do Jaccard foi 0.6728761984025344
+
