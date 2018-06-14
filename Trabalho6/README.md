@@ -1,5 +1,13 @@
 # Projeto Demonstrativo 6 - Rastreamento de objetos
 
+## Instalação dos pré-requisitos
+Para instalar os pré-requisitos necessários para executar esses códigos, basta executar:
+
+pip install -r requirements.txt
+
+O arquivo requirements.txt contém todas as bibliotecas que usamos para criarmos esses códigos, nem todas as bibliotecas do requirements.txt são necessárias para a execução desse projeto, pois algumas delas foram instalados para projetos anteriores. A única biblioteca que precisa ser instalada e não está nos requirements.txt é o OpenCV, pois instalamos ele compilando direto da fonte para podermos instalar a versão contrib junto (é essencial que essa versão esteja instalada para o funcionamento do código), o link a seguir é um ótimo tutorial de como instalar o OpenCV com a versão contrib:
+https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
+
 ## Organização dos arquivos do projeto
 Para manter um certo padrão, foi criada uma pasta "data" pasta servir de diretório para todos os datasets com a seguinte organização:
 Data/Base_de_dados/Descricao_dos_dados/imagens e groundTruth (ex: data/Professor/car1)
