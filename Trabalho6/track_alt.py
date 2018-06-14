@@ -200,7 +200,7 @@ def main():
     ap = argparse.ArgumentParser('Settings.')
 
     # mode arguments
-    ap.add_argument('-d', '--dataset', type=str,
+    ap.add_argument('-d', '--dataset', type=str, default="Professor_car1",
         help='Dataset name.')
     ap.add_argument('-m', '--matcher', type=str, default='sqdiff',
         help='Method to be used with the template matcher. Can be \'ccoeff\', \'ccorr\' or \'sqdiff\' (default).')
