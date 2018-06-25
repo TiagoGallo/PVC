@@ -1,0 +1,305 @@
+
+Tracker = MEDIANFLOW	 Dataset = Professor_car1
+A robustez foi de 0.9090647246984427
+A media do Jaccard foi 0.8013447873276826
+
+
+Tracker = MEDIANFLOW	 Dataset = Professor_car2
+A robustez foi de 0.7042942219023637
+A media do Jaccard foi 0.557256323318121
+
+
+Tracker = MEDIANFLOW	 Dataset = Babenko_OccludedFace2
+A robustez foi de 1.0
+A media do Jaccard foi 0.7469999244907579
+
+
+Tracker = MEDIANFLOW	 Dataset = Babenko_surfer
+A robustez foi de 0.9311418609270359
+A media do Jaccard foi 0.41864244091322367
+
+
+Tracker = MEDIANFLOW	 Dataset = Cehovin_dinosaur
+A robustez foi de 0.7581128112377238
+A media do Jaccard foi 0.43408228854522307
+
+
+Tracker = MEDIANFLOW	 Dataset = Cehovin_gymnastics
+A robustez foi de 0.38517264977486426
+A media do Jaccard foi 0.49103998812677874
+
+
+Tracker = MEDIANFLOW	 Dataset = Cehovin_hand
+A robustez foi de 0.29096045886431027
+A media do Jaccard foi 0.5620873154167091
+
+
+Tracker = MEDIANFLOW	 Dataset = Cehovin_hand2
+A robustez foi de 0.14700433055452888
+A media do Jaccard foi 0.5017500162161704
+
+
+Tracker = MEDIANFLOW	 Dataset = Cehovin_torus
+A robustez foi de 0.6336403452723879
+A media do Jaccard foi 0.5895630588236747
+
+
+Tracker = MEDIANFLOW	 Dataset = Ellis_ijcv2011_head_motion
+A robustez foi de 1.0
+A media do Jaccard foi 0.7731426646454959
+
+
+Tracker = MEDIANFLOW	 Dataset = Ellis_ijcv2011_track_running
+A robustez foi de 0.7417041901444698
+A media do Jaccard foi 0.5125115145893712
+
+
+Tracker = MEDIANFLOW	 Dataset = Ellis_ijcv2011_shaking_camera
+A robustez foi de 0.6539846588358453
+A media do Jaccard foi 0.5123293731106151
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_cliff-dive1
+A robustez foi de 0.44932896411722156
+A media do Jaccard foi 0.577220053130367
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_cliff-dive2
+A robustez foi de 3.919118050771162e-05
+A media do Jaccard foi 0.41995079727323703
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_motocross1
+A robustez foi de 0.13205459052580304
+A media do Jaccard foi 0.6408314973603128
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_motocross2
+A robustez foi de 0.004276820349208926
+A media do Jaccard foi 0.8305195298844258
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_mountain-bike
+A robustez foi de 0.7677299919621036
+A media do Jaccard foi 0.6778404111369364
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_skiing
+A robustez foi de 0.0024787521766663585
+A media do Jaccard foi 0.40676313247233536
+
+
+Tracker = MEDIANFLOW	 Dataset = Godec_volleyball
+A robustez foi de 0.656494027106502
+A media do Jaccard foi 0.6543184271449599
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_car
+A robustez foi de 0.9090647246984427
+A media do Jaccard foi 0.8013447873276826
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_CarChase
+A robustez foi de 0.7042942219023637
+A media do Jaccard foi 0.557256323318121
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_david
+A robustez foi de 1.0
+A media do Jaccard foi 0.7453085053869704
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_jumping
+A robustez foi de 0.6183075876067515
+A media do Jaccard foi 0.6486951555266626
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_Motocross
+A robustez foi de 0.4546223119861231
+A media do Jaccard foi 0.6064641019059104
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_Panda
+A robustez foi de 0.690649116920291
+A media do Jaccard foi 0.46239938436967387
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_pedestrian3
+A robustez foi de 0.42176400445731554
+A media do Jaccard foi 0.6798483390112746
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_pedestrian4
+A robustez foi de 0.8369076550895148
+A media do Jaccard foi 0.6550369150538244
+
+
+Tracker = MEDIANFLOW	 Dataset = Kalal_pedestrian5
+A robustez foi de 0.8487976789195573
+A media do Jaccard foi 0.6773226848895022
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_diving
+A robustez foi de 0.35222740999271124
+A media do Jaccard foi 0.47548578983599343
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_gym
+A robustez foi de 0.8549964488494356
+A media do Jaccard foi 0.5301923553121863
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_jump
+A robustez foi de 0.3709323651433022
+A media do Jaccard foi 0.3718450114073947
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_trans
+A robustez foi de 0.7835640758096347
+A media do Jaccard foi 0.6542137170796646
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_animal
+A robustez foi de 0.6514390575310556
+A media do Jaccard foi 0.7283243220262554
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_basketball
+A robustez foi de 0.6339399120566129
+A media do Jaccard foi 0.552487474222618
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_football
+A robustez foi de 0.9202568224350588
+A media do Jaccard foi 0.5874166749724191
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_shaking
+A robustez foi de 0.5171922279614769
+A media do Jaccard foi 0.6086188714238491
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_singer1
+A robustez foi de 1.0
+A media do Jaccard foi 0.7111055634757746
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_singer2
+A robustez foi de 0.034394348575377605
+A media do Jaccard foi 0.748022942939444
+
+
+Tracker = MEDIANFLOW	 Dataset = Kwon_VTD_skating2
+A robustez foi de 0.446031617110012
+A media do Jaccard foi 0.5713324393597535
+
+
+Tracker = MEDIANFLOW	 Dataset = Other_Asada
+A robustez foi de 0.36787944117144233
+A media do Jaccard foi 0.6122285747616731
+
+
+Tracker = MEDIANFLOW	 Dataset = Other_drunk2
+A robustez foi de 0.9675704569904013
+A media do Jaccard foi 0.3896098522839771
+
+
+Tracker = MEDIANFLOW	 Dataset = Other_dudek-face
+A robustez foi de 0.9741170809751881
+A media do Jaccard foi 0.5281910331821926
+
+
+Tracker = MEDIANFLOW	 Dataset = Other_faceocc1
+A robustez foi de 1.0
+A media do Jaccard foi 0.7382936508273102
+
+
+Tracker = MEDIANFLOW	 Dataset = Other_figure_skating
+A robustez foi de 0.6802922832973347
+A media do Jaccard foi 0.4878846982884312
+
+
+Tracker = MEDIANFLOW	 Dataset = Other_woman
+A robustez foi de 0.34748041340576574
+A media do Jaccard foi 0.5672627884484188
+
+
+Tracker = MEDIANFLOW	 Dataset = PROST_board
+A robustez foi de 0.8788642582821151
+A media do Jaccard foi 0.6458726930341608
+
+
+Tracker = MEDIANFLOW	 Dataset = PROST_box
+A robustez foi de 0.8344065855588225
+A media do Jaccard foi 0.6591615414398114
+
+
+Tracker = MEDIANFLOW	 Dataset = PROST_lemming
+A robustez foi de 0.7987405525741005
+A media do Jaccard foi 0.6294626829228471
+
+
+Tracker = MEDIANFLOW	 Dataset = PROST_liquor
+A robustez foi de 0.7992048916091276
+A media do Jaccard foi 0.8387921372809979
+
+
+Tracker = MEDIANFLOW	 Dataset = Ross_car11
+A robustez foi de 0.8580771848652875
+A media do Jaccard foi 0.4974084551369119
+
+
+Tracker = MEDIANFLOW	 Dataset = Ross_dog1
+A robustez foi de 1.0
+A media do Jaccard foi 0.7501661879599553
+
+
+Tracker = MEDIANFLOW	 Dataset = Ross_Sylvestr
+A robustez foi de 0.935181970820667
+A media do Jaccard foi 0.6686466038442486
+
+
+Tracker = MEDIANFLOW	 Dataset = Ross_trellis
+A robustez foi de 0.8534650349739935
+A media do Jaccard foi 0.6179184234631765
+
+
+Tracker = MEDIANFLOW	 Dataset = Thang_coke
+A robustez foi de 0.5375735693311237
+A media do Jaccard foi 0.49642482354518364
+
+
+Tracker = MEDIANFLOW	 Dataset = Thang_person
+A robustez foi de 0.5795782787848095
+A media do Jaccard foi 0.5567634022871633
+
+
+Tracker = MEDIANFLOW	 Dataset = Thang_tiger1
+A robustez foi de 0.07811485222973967
+A media do Jaccard foi 0.6963068394629697
+
+
+Tracker = MEDIANFLOW	 Dataset = Thang_tiger2
+A robustez foi de 0.22683861000128816
+A media do Jaccard foi 0.5734494539593848
+
+
+Tracker = MEDIANFLOW	 Dataset = Wang_bird_1
+A robustez foi de 0.014973486605736698
+A media do Jaccard foi 0.4667384294100107
+
+
+Tracker = MEDIANFLOW	 Dataset = Wang_bird_2
+A robustez foi de 0.29390761494152196
+A media do Jaccard foi 0.4673731029348724
+
+
+Tracker = MEDIANFLOW	 Dataset = Wang_bolt
+A robustez foi de 0.011448299902758108
+A media do Jaccard foi 0.5677327057769704
+
+
+Tracker = MEDIANFLOW	 Dataset = Wang_girl_mov
+A robustez foi de 0.740669973031074
+A media do Jaccard foi 0.5585065189316546
+

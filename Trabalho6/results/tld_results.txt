@@ -1,0 +1,299 @@
+
+Tracker = TLD	 Dataset = Professor_car1
+A robustez foi de 0.9090647246984427
+A media do Jaccard foi 0.5770394888574377
+
+
+Tracker = TLD	 Dataset = Professor_car2
+A robustez foi de 0.0018567845274271627
+A media do Jaccard foi 0.3337210399371807
+
+
+Tracker = TLD	 Dataset = Babenko_OccludedFace2
+A robustez foi de 0.8016122866352482
+A media do Jaccard foi 0.45372888913051085
+
+
+Tracker = TLD	 Dataset = Babenko_surfer
+A robustez foi de 0.8073234257675821
+A media do Jaccard foi 0.400358256652154
+
+
+Tracker = TLD	 Dataset = Cehovin_dinosaur
+A robustez foi de 0.36226307108403205
+A media do Jaccard foi 0.41425529870247035
+
+
+Tracker = TLD	 Dataset = Cehovin_gymnastics
+A robustez foi de 0.2390469252510065
+A media do Jaccard foi 0.42644117302411777
+
+
+Tracker = TLD	 Dataset = Cehovin_hand
+A robustez foi de 0.08465798862252998
+A media do Jaccard foi 0.46381764557260274
+
+
+Tracker = TLD	 Dataset = Cehovin_hand2
+A robustez foi de 0.017246425472900923
+A media do Jaccard foi 0.4084958333784777
+
+
+Tracker = TLD	 Dataset = Cehovin_torus
+A robustez foi de 0.40150008715691093
+A media do Jaccard foi 0.5177642149206864
+
+
+Tracker = TLD	 Dataset = Ellis_ijcv2011_head_motion
+A robustez foi de 1.0
+A media do Jaccard foi 0.47815666051523925
+
+
+Tracker = TLD	 Dataset = Ellis_ijcv2011_track_running
+A robustez foi de 0.698677695317099
+A media do Jaccard foi 0.3954992146183003
+
+
+Tracker = TLD	 Dataset = Ellis_ijcv2011_shaking_camera
+A robustez foi de 0.4977414972249903
+A media do Jaccard foi 0.4125445640588815
+
+
+Tracker = TLD	 Dataset = Godec_cliff-dive1
+A robustez foi de 0.44932896411722156
+A media do Jaccard foi 0.46484330617118746
+
+
+Tracker = TLD	 Dataset = Godec_cliff-dive2
+A robustez foi de 0.0003557876582749985
+A media do Jaccard foi 0.41730170911065756
+
+
+Tracker = TLD	 Dataset = Godec_motocross1
+A robustez foi de 0.09138827995478023
+A media do Jaccard foi 0.554627352650005
+
+
+Tracker = TLD	 Dataset = Godec_motocross2
+A robustez foi de 0.004276820349208926
+A media do Jaccard foi 0.7856646825689958
+
+
+Tracker = TLD	 Dataset = Godec_mountain-bike
+A robustez foi de 0.4525072282890832
+A media do Jaccard foi 0.49160478040481603
+
+
+Tracker = TLD	 Dataset = Godec_skiing
+A robustez foi de 1.300729765406762e-05
+A media do Jaccard foi 0.3527351224607372
+
+
+Tracker = TLD	 Dataset = Godec_volleyball
+A robustez foi de 0.40583702865708093
+A media do Jaccard foi 0.5236455848756771
+
+
+Tracker = TLD	 Dataset = Kalal_car
+A robustez foi de 0.9090647246984427
+A media do Jaccard foi 0.5770394888574377
+
+
+Tracker = TLD	 Dataset = Kalal_CarChase
+A robustez foi de 0.0018567845274271627
+A media do Jaccard foi 0.3337210399371807
+
+
+Tracker = TLD	 Dataset = Kalal_david
+A robustez foi de 0.7319129974053161
+A media do Jaccard foi 0.5586829992532004
+
+
+Tracker = TLD	 Dataset = Kalal_jumping
+A robustez foi de 0.7494156282712188
+A media do Jaccard foi 0.5680202962027594
+
+
+Tracker = TLD	 Dataset = Kalal_Motocross
+A robustez foi de 0.3629415367353997
+A media do Jaccard foi 0.3066150174006022
+
+
+Tracker = TLD	 Dataset = Kalal_Panda
+
+Tracker = TLD	 Dataset = Kalal_pedestrian3
+A robustez foi de 0.03164302891595056
+A media do Jaccard foi 0.5169091473194962
+
+
+Tracker = TLD	 Dataset = Kalal_pedestrian4
+
+Tracker = TLD	 Dataset = Kalal_pedestrian5
+A robustez foi de 0.8487976789195573
+A media do Jaccard foi 0.3997379230990196
+
+
+Tracker = TLD	 Dataset = Kwon_diving
+A robustez foi de 0.1240641483501735
+A media do Jaccard foi 0.47631877148365037
+
+
+Tracker = TLD	 Dataset = Kwon_gym
+A robustez foi de 0.7905811704643757
+A media do Jaccard foi 0.28868912310729644
+
+
+Tracker = TLD	 Dataset = Kwon_jump
+A robustez foi de 0.10737746321075631
+A media do Jaccard foi 0.413611050751377
+
+
+Tracker = TLD	 Dataset = Kwon_trans
+A robustez foi de 0.6139726608994069
+A media do Jaccard foi 0.599932039688369
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_animal
+A robustez foi de 0.6514390575310556
+A media do Jaccard foi 0.49639039658686296
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_basketball
+A robustez foi de 0.21585483200957264
+A media do Jaccard foi 0.5307105036399108
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_football
+A robustez foi de 0.47334894383146764
+A media do Jaccard foi 0.5175105483592515
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_shaking
+A robustez foi de 0.13834261157780356
+A media do Jaccard foi 0.5669377586465417
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_singer1
+A robustez foi de 0.7732577404831906
+A media do Jaccard foi 0.45098781844687447
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_singer2
+A robustez foi de 0.01934724050083503
+A media do Jaccard foi 0.61253949041469
+
+
+Tracker = TLD	 Dataset = Kwon_VTD_skating2
+A robustez foi de 0.2259928031590468
+A media do Jaccard foi 0.5257620261391561
+
+
+Tracker = TLD	 Dataset = Other_Asada
+A robustez foi de 0.1946867083315102
+A media do Jaccard foi 0.5323764207177111
+
+
+Tracker = TLD	 Dataset = Other_drunk2
+A robustez foi de 0.8205321401476269
+A media do Jaccard foi 0.2034897744092761
+
+
+Tracker = TLD	 Dataset = Other_dudek-face
+A robustez foi de 0.8322965814709797
+A media do Jaccard foi 0.5357473183852153
+
+
+Tracker = TLD	 Dataset = Other_faceocc1
+A robustez foi de 0.8183661435302001
+A media do Jaccard foi 0.5062859607990119
+
+
+Tracker = TLD	 Dataset = Other_figure_skating
+A robustez foi de 0.40054555690800925
+A media do Jaccard foi 0.46296390029165346
+
+
+Tracker = TLD	 Dataset = Other_woman
+A robustez foi de 0.6044987331079412
+A media do Jaccard foi 0.5408852719704139
+
+
+Tracker = TLD	 Dataset = PROST_board
+A robustez foi de 0.7086929967127042
+A media do Jaccard foi 0.507871419955169
+
+
+Tracker = TLD	 Dataset = PROST_box
+A robustez foi de 0.37427718463330034
+A media do Jaccard foi 0.5849941668782473
+
+
+Tracker = TLD	 Dataset = PROST_lemming
+A robustez foi de 0.28410057497064506
+A media do Jaccard foi 0.49593308518822166
+
+
+Tracker = TLD	 Dataset = PROST_liquor
+A robustez foi de 0.5564338982454284
+A media do Jaccard foi 0.7120928737687374
+
+
+Tracker = TLD	 Dataset = Ross_car11
+A robustez foi de 0.7948579681254897
+A media do Jaccard foi 0.6253576808015076
+
+
+Tracker = TLD	 Dataset = Ross_dog1
+A robustez foi de 0.9780550236663227
+A media do Jaccard foi 0.619191628778398
+
+
+Tracker = TLD	 Dataset = Ross_Sylvestr
+A robustez foi de 0.6689239619462741
+A media do Jaccard foi 0.5184454844311429
+
+
+Tracker = TLD	 Dataset = Ross_trellis
+A robustez foi de 0.2278943261113059
+A media do Jaccard foi 0.5319750536021459
+
+
+Tracker = TLD	 Dataset = Thang_coke
+A robustez foi de 0.3941457624048215
+A media do Jaccard foi 0.43350867147310734
+
+
+Tracker = TLD	 Dataset = Thang_person
+A robustez foi de 0.6347364189402819
+A media do Jaccard foi 0.5236451847777175
+
+
+Tracker = TLD	 Dataset = Thang_tiger1
+A robustez foi de 0.013111342018902062
+A media do Jaccard foi 0.5138983497108643
+
+
+Tracker = TLD	 Dataset = Thang_tiger2
+A robustez foi de 0.014946222251322907
+A media do Jaccard foi 0.46374851545241746
+
+
+Tracker = TLD	 Dataset = Wang_bird_1
+A robustez foi de 0.0036906023271317955
+A media do Jaccard foi 0.47213881431162275
+
+
+Tracker = TLD	 Dataset = Wang_bird_2
+A robustez foi de 0.21640313503371336
+A media do Jaccard foi 0.5417250785595747
+
+
+Tracker = TLD	 Dataset = Wang_bolt
+A robustez foi de 0.0015852844817385392
+A media do Jaccard foi 0.5294029732684462
+
+
+Tracker = TLD	 Dataset = Wang_girl_mov
+A robustez foi de 0.6063283816889249
+A media do Jaccard foi 0.4993201689443804
+
