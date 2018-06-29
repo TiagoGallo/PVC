@@ -17,6 +17,8 @@ LANDMARK_COLOR_MAP = {
     "chin": (0, 0, 0) #Desenha os pontos da bochecha de preto
 }
 
+def nothing(x):
+    pass
 
 def draw_landmarks(img, landmarks, landmark_color_map):
     """
@@ -54,10 +56,10 @@ def user_state(img, landmarks):
     Determine the user state from the detected landmarks.
     """
     # thresholds for movement
-    x_lim_left = -10
-    x_lim_right = 10
-    y_lim_top = 30
-    y_lim_bottom = 10
+    x_lim_right = -10 + cv2.getTrackbarPos('Right','Webcam')
+    x_lim_left = 10 - cv2.getTrackbarPos('Left','Webcam')
+    y_lim_top = 30 + cv2.getTrackbarPos('Up','Webcam')
+    y_lim_bottom = 10 + cv2.getTrackbarPos('Down','Webcam')
 
     # pixel difference in x
     nose_top = landmarks['nose_bridge'][0][0]
@@ -76,19 +78,19 @@ def user_state(img, landmarks):
     print('[DEBUG] pixel diff: ({}, {}/{})'.format(x_diff, y_diff_eye, y_diff_nose))
     state = [0, 0]
     #Movimento para direita
-    if x_diff < -5:
+    if x_diff < x_lim_right:
         print("[DEBUG] Direita")
         state[0] = -1
     #Movimento para esquerda
-    elif x_diff > 10:
+    elif x_diff > x_lim_left:
         print("[DEBUG] Esquerda")
         state[0] = 1
     #movimento para baixo
-    if y_diff_eye < 15:
+    if y_diff_eye < y_lim_bottom:
         print("[DEBUG] Baixo")
         state[1] = -1
     #Movimento para cima
-    elif y_diff_nose < 40:
+    elif y_diff_nose < y_lim_top:
         print("[DEBUG] Cima")
         state[1] = 1
     return state
@@ -180,6 +182,13 @@ def main():
 
     # parse the arguments
     args = vars(ap.parse_args())
+
+    # Create OpenCV window and trackbars
+    cv2.namedWindow("Webcam")
+    cv2.createTrackbar('Up','Webcam',0,255,nothing)
+    cv2.createTrackbar('Down','Webcam',0,255,nothing)
+    cv2.createTrackbar('Left','Webcam',0,255,nothing)
+    cv2.createTrackbar('Right','Webcam',0,255,nothing)
 
     # create the capture object with the default webcam
     cam = cv2.VideoCapture(0)
