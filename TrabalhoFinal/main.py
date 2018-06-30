@@ -12,13 +12,23 @@ LANDMARK_COLOR_MAP = {
     "right_eyebrow": (0, 0, 255), #Desenha os pontos da sobrancelha direita de vermelho
     "nose_tip": (0, 255, 0), #Desenha os pontos da ponta do nariz de verde
     "nose_bridge": (255, 255, 0), #Desenha os pontos do corpo do nariz de ciano
-    "bottom_lip": (0, 255, 255), #Desenha os pontos do labio de amarelo
-    "top_lip": (0, 255, 255), #Desenha os pontos do labio de amarelo
+    "bottom_lip": (0, 127, 255), #Desenha os pontos do labio de amarelo
+    "top_lip": (0, 255, 127), #Desenha os pontos do labio de amarelo
     "chin": (0, 0, 0) #Desenha os pontos da bochecha de preto
 }
 
-def nothing(x):
+def nothing(arg = None):
     pass
+
+def create_trackbars():
+    """
+    Create the trackbars on the window and initialize them to the default values.
+    """
+    cv2.createTrackbar('Up', 'Webcam', 50, 100, nothing)
+    cv2.createTrackbar('Down', 'Webcam', 50, 100, nothing)
+    cv2.createTrackbar('Left', 'Webcam', 50, 100, nothing)
+    cv2.createTrackbar('Right', 'Webcam', 50, 100, nothing)
+    cv2.createTrackbar('Sens', 'Webcam', 100, 200, nothing)
 
 def draw_landmarks(img, landmarks, landmark_color_map):
     """
@@ -28,14 +38,12 @@ def draw_landmarks(img, landmarks, landmark_color_map):
         for point in landmarks[landmark]:
             cv2.circle(img, point, 1, color, -1)
 
-
 def draw_bbox(img, location):
     """
     Draws a bounding box on the image for each face on the list of given face locations.
     """
     (top, right, bottom, left) = location
     cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0))
-
 
 def largest_face(face_locations):
     """
@@ -50,49 +58,84 @@ def largest_face(face_locations):
             max_location = (top, right, bottom, left)
     return max_location
 
-
-def user_state(img, landmarks):
+def user_state(img, landmarks, location):
     """
-    Determine the user state from the detected landmarks.
+    Determine the user state from the detected landmarks using camera geometry.
     """
     # thresholds for movement
-    x_lim_right = -10 + cv2.getTrackbarPos('Right','Webcam')
-    x_lim_left = 10 - cv2.getTrackbarPos('Left','Webcam')
-    y_lim_top = 30 + cv2.getTrackbarPos('Up','Webcam')
-    y_lim_bottom = 10 + cv2.getTrackbarPos('Down','Webcam')
+    h, w = img.shape[0:2]
+    x_lim_right = int(w/2 * (1 + (cv2.getTrackbarPos('Right','Webcam'))/100))
+    x_lim_left = int(w/2 * (cv2.getTrackbarPos('Left','Webcam')/100))
+    y_lim_top = int(h/2 * (cv2.getTrackbarPos('Up','Webcam')/100))
+    y_lim_bottom = int(h/2 * (1 + (cv2.getTrackbarPos('Down','Webcam'))/100))
+    sens = (cv2.getTrackbarPos('Sens','Webcam'))/100
 
-    # pixel difference in x
-    nose_top = landmarks['nose_bridge'][0][0]
-    nose_bottom = landmarks['nose_bridge'][3][0]
-    x_diff = nose_bottom - nose_top
-
-    # pixel difference in y
-    eyebrows_center = (landmarks['left_eyebrow'][4][1] + landmarks['right_eyebrow'][0][1]) // 2
-    eyes_center = (landmarks['left_eye'][3][1] + landmarks['right_eye'][0][1]) // 2
-    y_diff_eye = eyes_center - eyebrows_center
-    nose_top = landmarks['nose_bridge'][0][1]
-    nose_bottom = landmarks['nose_bridge'][3][1]
-    y_diff_nose = nose_bottom - nose_top
+    # draw the boundaries
+    cv2.line(img, (x_lim_right, 0), (x_lim_right, h), (255, 0, 0))
+    cv2.line(img, (x_lim_left, 0), (x_lim_left, h), (255, 0, 0))
+    cv2.line(img, (0, y_lim_top), (w, y_lim_top), (255, 0, 0))
+    cv2.line(img, (0, y_lim_bottom), (w, y_lim_bottom), (255, 0, 0))
+        
+    # 2D image points for the detected face
+    image_points = np.array([
+                                landmarks['nose_bridge'][3], # Nose tip
+                                landmarks['chin'][8],        # Chin
+                                landmarks['left_eye'][0],    # Left eye left corner
+                                landmarks['right_eye'][3],   # Right eye right corne
+                                landmarks['top_lip'][0],     # Left Mouth corner
+                                landmarks['top_lip'][6]      # Right mouth corner
+                            ], dtype=np.float)
+    
+    # 3D model points for a face in an arbitrary world frame
+    model_points = np.array([
+                                (0.0, 0.0, 0.0),          # Nose tip
+                                (0.0, -66.0, -13.0),      # Chin
+                                (-45.0, 34.0, -27.0),     # Left eye left corner
+                                (45.0, 34.0, -27.0),      # Right eye right corne
+                                (-30.0, -30.0, -25.0),    # Left Mouth corner
+                                (30.0, -30.0, -25.0)      # Right mouth corner
+                            ])
+    
+    # internal parameters for the camera (approximated)
+    f = img.shape[1]
+    c_x, c_y = (img.shape[1]/2, img.shape[0]/2)
+    mtx = np.array([[f, 0, c_x],
+                    [0, f, c_y],
+                    [0, 0, 1]], dtype=np.float)
+    dist = np.zeros((4,1))
+    (ret, rvec, tvec) = cv2.solvePnP(model_points, image_points, mtx, dist)
+    
+    # project a 3D point (defined by the sensibility) onto the image plane
+    # this is used to draw a line sticking out of the nose
+    nose_end_3D = np.array([(0.0, 0.0, 100.0*sens)])
+    (nose_end_2D, _) = cv2.projectPoints(nose_end_3D, rvec, tvec, mtx, dist)
+    focus_x = int(nose_end_2D[0][0][0])
+    focus_y = int(nose_end_2D[0][0][1])
+    p1 = (int(image_points[0][0]), int(image_points[0][1]))
+    p2 = (focus_x, focus_y)
+    cv2.line(img, p1, p2, (255,0,0), 2)
+    for p in image_points:
+        cv2.circle(img, (int(p[0]), int(p[1])), 3, (0, 0, 255), -1)
 
     # determine if there should be movement
-    print('[DEBUG] pixel diff: ({}, {}/{})'.format(x_diff, y_diff_eye, y_diff_nose))
     state = [0, 0]
-    #Movimento para direita
-    if x_diff < x_lim_right:
-        print("[DEBUG] Direita")
-        state[0] = -1
     #Movimento para esquerda
-    elif x_diff > x_lim_left:
+    if focus_x < x_lim_left:
         print("[DEBUG] Esquerda")
+        state[0] = -1
+    #Movimento para direita
+    elif focus_x > x_lim_right:
+        print("[DEBUG] Direita")
         state[0] = 1
     #movimento para baixo
-    if y_diff_eye < y_lim_bottom:
+    if focus_y > y_lim_bottom:
         print("[DEBUG] Baixo")
         state[1] = -1
     #Movimento para cima
-    elif y_diff_nose < y_lim_top:
+    elif focus_y < y_lim_top:
         print("[DEBUG] Cima")
         state[1] = 1
+
     return state
 
 class Mouse:
@@ -111,7 +154,7 @@ class Mouse:
     def move(self, state):
         '''
         Receive the program state as [X, Y]
-            X: -1 = go right    0 = nothing     1 = go left
+            X: -1 = go left    0 = nothing     1 = go right
             Y: -1 = go down     0 = nothing     1 = go up
         '''
         X, Y = state
@@ -121,10 +164,10 @@ class Mouse:
         # Analyze the x movement
         if X == 0:
             self.att_acc('X')    #decrease the acc if different of 0
-        elif X == -1:
+        elif X == 1:
             self.accX += 1 # Move right
             if self.accX > self.accMax: self.accX = self.accMax # Limit the moviment
-        elif X == 1:
+        elif X == -1:
             self.accX -= 1 # Move left
             if self.accX < -(self.accMax): self.accX = -(self.accMax) # Limit the moviment
 
@@ -171,24 +214,13 @@ def main():
 
     # setup argument parser
     ap = argparse.ArgumentParser('Settings for the mouse.')
-
-    # mode arguments
     ap.add_argument('-d', '--delay', type=int, default=1,
         help='Delay before registering mouse click.')
-    # ap.add_argument('-r', '--recovery', type=int, default=-1,
-    #     help='Recovery time (minimum waiting time) between clicks.')
-    # ap.add_argument('-m', '--movement', type=str, default='rel',
-    #     help='Mouse movement mode. Can be \'rel\' (default) or \'abs\'.')
-
-    # parse the arguments
     args = vars(ap.parse_args())
 
     # Create OpenCV window and trackbars
     cv2.namedWindow("Webcam")
-    cv2.createTrackbar('Up','Webcam',0,255,nothing)
-    cv2.createTrackbar('Down','Webcam',0,255,nothing)
-    cv2.createTrackbar('Left','Webcam',0,255,nothing)
-    cv2.createTrackbar('Right','Webcam',0,255,nothing)
+    create_trackbars()
 
     # create the capture object with the default webcam
     cam = cv2.VideoCapture(0)
@@ -203,9 +235,12 @@ def main():
     while True:
 
         # try to read the frame
-        grabbed, img = cam.read()
-        if img is None or grabbed is False:
+        grabbed, frame = cam.read()
+        if frame is None or grabbed is False:
             break
+        
+        # mirror the image horizontally (so that the processing is more intuitive)
+        img = cv2.flip(frame, 1)
 
         # skip frames when the counter is not 0
         if counter == 0:
@@ -227,7 +262,7 @@ def main():
 
                 if (len(landmarks) > 0):
                     # get the relative pose of the face
-                    state = user_state(img, landmarks)
+                    state = user_state(img, landmarks, location)
 
                     # move mouse according to state
                     mouse.move(state)
