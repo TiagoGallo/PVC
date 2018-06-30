@@ -1,8 +1,10 @@
+# import packages
 import cv2
-import face_recognition
-import argparse
 import numpy as np
-import pyautogui
+import argparse
+import draw
+import detect
+from mouse import Mouse
 
 # landmark color mapping for drawing
 LANDMARK_COLOR_MAP = {
@@ -20,193 +22,6 @@ LANDMARK_COLOR_MAP = {
 def nothing(arg = None):
     pass
 
-def create_trackbars():
-    """
-    Create the trackbars on the window and initialize them to the default values.
-    """
-    cv2.createTrackbar('Up', 'Webcam', 50, 100, nothing)
-    cv2.createTrackbar('Down', 'Webcam', 50, 100, nothing)
-    cv2.createTrackbar('Left', 'Webcam', 50, 100, nothing)
-    cv2.createTrackbar('Right', 'Webcam', 50, 100, nothing)
-    cv2.createTrackbar('Sens', 'Webcam', 100, 200, nothing)
-
-def draw_landmarks(img, landmarks, landmark_color_map):
-    """
-    Draws the detected face landmarks on the image according to the given color map.
-    """
-    for landmark, color in landmark_color_map.items():
-        for point in landmarks[landmark]:
-            cv2.circle(img, point, 1, color, -1)
-
-def draw_bbox(img, location):
-    """
-    Draws a bounding box on the image for each face on the list of given face locations.
-    """
-    (top, right, bottom, left) = location
-    cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0))
-
-def largest_face(face_locations):
-    """
-    Determine the largest face detected and return its location.
-    """
-    max_size = 0
-    max_location = None
-    for (top, right, bottom, left) in face_locations:
-        size = (bottom - top) * (right - left)
-        if size > max_size:
-            max_size = size
-            max_location = (top, right, bottom, left)
-    return max_location
-
-def user_state(img, landmarks, location):
-    """
-    Determine the user state from the detected landmarks using camera geometry.
-    """
-    # thresholds for movement
-    h, w = img.shape[0:2]
-    x_lim_right = int(w/2 * (1 + (cv2.getTrackbarPos('Right','Webcam'))/100))
-    x_lim_left = int(w/2 * (cv2.getTrackbarPos('Left','Webcam')/100))
-    y_lim_top = int(h/2 * (cv2.getTrackbarPos('Up','Webcam')/100))
-    y_lim_bottom = int(h/2 * (1 + (cv2.getTrackbarPos('Down','Webcam'))/100))
-    sens = (cv2.getTrackbarPos('Sens','Webcam'))/100
-
-    # draw the boundaries
-    cv2.line(img, (x_lim_right, 0), (x_lim_right, h), (255, 0, 0))
-    cv2.line(img, (x_lim_left, 0), (x_lim_left, h), (255, 0, 0))
-    cv2.line(img, (0, y_lim_top), (w, y_lim_top), (255, 0, 0))
-    cv2.line(img, (0, y_lim_bottom), (w, y_lim_bottom), (255, 0, 0))
-        
-    # 2D image points for the detected face
-    image_points = np.array([
-                                landmarks['nose_bridge'][3], # Nose tip
-                                landmarks['chin'][8],        # Chin
-                                landmarks['left_eye'][0],    # Left eye left corner
-                                landmarks['right_eye'][3],   # Right eye right corne
-                                landmarks['top_lip'][0],     # Left Mouth corner
-                                landmarks['top_lip'][6]      # Right mouth corner
-                            ], dtype=np.float)
-    
-    # 3D model points for a face in an arbitrary world frame
-    model_points = np.array([
-                                (0.0, 0.0, 0.0),          # Nose tip
-                                (0.0, -66.0, -13.0),      # Chin
-                                (-45.0, 34.0, -27.0),     # Left eye left corner
-                                (45.0, 34.0, -27.0),      # Right eye right corne
-                                (-30.0, -30.0, -25.0),    # Left Mouth corner
-                                (30.0, -30.0, -25.0)      # Right mouth corner
-                            ])
-    
-    # internal parameters for the camera (approximated)
-    f = img.shape[1]
-    c_x, c_y = (img.shape[1]/2, img.shape[0]/2)
-    mtx = np.array([[f, 0, c_x],
-                    [0, f, c_y],
-                    [0, 0, 1]], dtype=np.float)
-    dist = np.zeros((4,1))
-    (ret, rvec, tvec) = cv2.solvePnP(model_points, image_points, mtx, dist)
-    
-    # project a 3D point (defined by the sensibility) onto the image plane
-    # this is used to draw a line sticking out of the nose
-    nose_end_3D = np.array([(0.0, 0.0, 100.0*sens)])
-    (nose_end_2D, _) = cv2.projectPoints(nose_end_3D, rvec, tvec, mtx, dist)
-    focus_x = int(nose_end_2D[0][0][0])
-    focus_y = int(nose_end_2D[0][0][1])
-    p1 = (int(image_points[0][0]), int(image_points[0][1]))
-    p2 = (focus_x, focus_y)
-    cv2.line(img, p1, p2, (255,0,0), 2)
-    for p in image_points:
-        cv2.circle(img, (int(p[0]), int(p[1])), 3, (0, 0, 255), -1)
-
-    # determine if there should be movement
-    state = [0, 0]
-    #Movimento para esquerda
-    if focus_x < x_lim_left:
-        print("[DEBUG] Esquerda")
-        state[0] = -1
-    #Movimento para direita
-    elif focus_x > x_lim_right:
-        print("[DEBUG] Direita")
-        state[0] = 1
-    #movimento para baixo
-    if focus_y > y_lim_bottom:
-        print("[DEBUG] Baixo")
-        state[1] = -1
-    #Movimento para cima
-    elif focus_y < y_lim_top:
-        print("[DEBUG] Cima")
-        state[1] = 1
-
-    return state
-
-class Mouse:
-    def __init__(self, args):
-        self.width, self.height = pyautogui.size()
-        print("[DEBUG] O tamanho da janela eh {}x{}".format(self.width, self.height))
-
-        # Create an accelarator for both directions and a max value for them
-        self.accX   = 0
-        self.accY   = 0
-        self.accMax = 10
-
-        # Delay to click the mouse
-        self.delay = args["delay"]
-
-    def move(self, state):
-        '''
-        Receive the program state as [X, Y]
-            X: -1 = go left    0 = nothing     1 = go right
-            Y: -1 = go down     0 = nothing     1 = go up
-        '''
-        X, Y = state
-        
-        w_pos, h_pos = self.actual_position()
-
-        # Analyze the x movement
-        if X == 0:
-            self.att_acc('X')    #decrease the acc if different of 0
-        elif X == 1:
-            self.accX += 1 # Move right
-            if self.accX > self.accMax: self.accX = self.accMax # Limit the moviment
-        elif X == -1:
-            self.accX -= 1 # Move left
-            if self.accX < -(self.accMax): self.accX = -(self.accMax) # Limit the moviment
-
-        # Analyze the y movement
-        if Y == 0:
-            self.att_acc('Y')    #decrease the acc if different of 0
-        elif Y == -1:
-            self.accY += 1 # Move down
-            if self.accY > self.accMax: self.accY = self.accMax # Limit the moviment
-        elif Y == 1:
-            self.accY -= 1 # Move up
-            if self.accY < -(self.accMax): self.accY = -(self.accMax) # Limit the moviment
-
-        pyautogui.moveRel(self.accX, self.accY)
-
-    def actual_position(self):
-        '''
-        Get mouse's actual position
-        '''
-        w_pos, h_pos = pyautogui.position()
-
-        return [w_pos, h_pos]
-
-    def att_acc(self, axis):
-        '''
-        Method to desaccelerate the accelerator
-        '''
-        if axis == 'X':
-            if self.accX > 0:
-                self.accX -= 1
-            elif self.accX < 0:
-                self.accX += 1
-
-        if axis == 'Y':
-            if self.accY > 0:
-                self.accY -= 1
-            elif self.accY < 0:
-                self.accY += 1
-
 def main():
     """
     Main function.
@@ -216,13 +31,19 @@ def main():
     ap = argparse.ArgumentParser('Settings for the mouse.')
     ap.add_argument('-d', '--delay', type=int, default=1,
         help='Delay before registering mouse click.')
+    ap.add_argument('-c', '--click', type=str,
+        help='Clicking method. Can be \'dwell\' or \'eye\'.')
     args = vars(ap.parse_args())
 
-    # Create OpenCV window and trackbars
+    # Create OpenCV window and trackbars (and initialize them to default values)
     cv2.namedWindow("Webcam")
-    create_trackbars()
+    cv2.createTrackbar('Up', 'Webcam', 50, 100, lambda: None)
+    cv2.createTrackbar('Down', 'Webcam', 50, 100, lambda: None)
+    cv2.createTrackbar('Left', 'Webcam', 50, 100, lambda: None)
+    cv2.createTrackbar('Right', 'Webcam', 50, 100, lambda: None)
+    cv2.createTrackbar('Sens', 'Webcam', 100, 200, lambda: None)
 
-    # create the capture object with the default webcam
+    # create video capture object with the default webcam
     cam = cv2.VideoCapture(0)
 
     # create the mouse object
@@ -238,38 +59,30 @@ def main():
         grabbed, frame = cam.read()
         if frame is None or grabbed is False:
             break
-        
+
         # mirror the image horizontally (so that the processing is more intuitive)
         img = cv2.flip(frame, 1)
 
         # skip frames when the counter is not 0
         if counter == 0:
 
-            # try to find faces on the image
-            face_locations = face_recognition.face_locations(img, model="hog")
-
-            # if faces were found, process them
-            if (len(face_locations) > 0):
-
-                # if there is more than one face on the image, pick the largest one
-                if (len(face_locations) > 1):
-                    location = largest_face(face_locations)
-                else:
-                    location = face_locations[0]
-
-                # find the facial landmarks on the face
-                landmarks = face_recognition.face_landmarks(img, face_locations=[location])[0]
-
-                if (len(landmarks) > 0):
+            # try to find the main face on the image
+            location = detect.find_main_face(img, model="hog")
+            if location is not None:
+            
+                # try to find the landmarks on the detected face
+                landmarks = detect.find_landmarks(img, location)
+                if landmarks is not None:
+                
                     # get the relative pose of the face
-                    state = user_state(img, landmarks, location)
+                    state = detect.user_state(img, landmarks, location)
+
+                    # draw the bounding box and the landmarks on the frame
+                    draw.draw_bbox(img, location)
+                    draw.draw_landmarks(img, landmarks, LANDMARK_COLOR_MAP)
 
                     # move mouse according to state
                     mouse.move(state)
-
-                    # draw the bounding box and the landmarks on the frame
-                    draw_bbox(img, location)
-                    draw_landmarks(img, landmarks, LANDMARK_COLOR_MAP)
 
             # show the frame
             cv2.imshow("Webcam", img)
@@ -279,7 +92,7 @@ def main():
         k = cv2.waitKey(1)
         if k == ord('q'):
             break
-
+    
     cam.release()
     cv2.destroyAllWindows()
 
