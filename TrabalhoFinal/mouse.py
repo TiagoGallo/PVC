@@ -1,5 +1,6 @@
 import pyautogui
 import time
+from state import State
 
 class Mouse:
     def __init__(self, args):
@@ -13,10 +14,16 @@ class Mouse:
 
         # Delay to click the mouse
         self.delay = args["delay"]
+        self.mode = args['click_mode']
 
         # Time counter to click the mouse
         self.timeStopped = time.time()
         self.clicked = False    # not a good solution
+
+        # time counters for the eyes
+        self.timeLeftEyeClosed = time.time()
+        self.timeRightEyeClosed = time.time()
+        self.timeBothEyesClosed = time.time()
 
     def update(self, state):
         '''
@@ -29,7 +36,10 @@ class Mouse:
         self.move(state)
 
         # check if there is need to click
-        self.rightClick(state)
+        if self.mode == 'dwell':
+            self.dwell_click(state)
+        elif self.mode == 'eye':
+            self.eye_click(state)
 
         #print("[DEBUG] accX = {}\taccY = {}".format(self.accX, self.accY))
 
@@ -39,7 +49,7 @@ class Mouse:
             X: -1 = go left    0 = nothing     1 = go right
             Y: -1 = go down     0 = nothing     1 = go up
         '''
-        X, Y = state
+        X, Y = state.mov
 
         # Analyze the x movement
         if X == 0:
@@ -87,12 +97,12 @@ class Mouse:
             else: 
                 self.accY = self.accY // 2
 
-    def rightClick(self, state):
+    def dwell_click(self, state):
         '''
-        Check if we need to click
+        Check if we need to click (dwell mode)
         '''
         # if there is no movement, check if is stopped for more time than the delay
-        if state == [0,0]:
+        if state.mov == [0,0]:
             elapsed_stop = time.time() - self.timeStopped
             if elapsed_stop > self.delay and not self.clicked:
                 pyautogui.click()  # click the mouse
@@ -103,3 +113,60 @@ class Mouse:
             self.clicked = False
 
         print("[DEBUG] tempo parado = ", time.time() - self.timeStopped)
+
+    def eye_click(self, state):
+        '''
+        Check if we need to click (eye mode)
+        '''
+        # the left eye is closed
+        if state.eye == [1, 0]:
+
+            # update the timers on the right eye and on both eyes
+            self.timeRightEyeClosed = time.time()
+            self.timeBothEyesClosed = time.time()
+
+            # check for how much time the left eye has been closed
+            elapsed_stop = time.time() - self.timeLeftEyeClosed
+            if elapsed_stop > self.delay and not self.clicked:
+                pyautogui.click()
+                self.clicked = True
+
+            print("[DEBUG] tempo com olho esquerdo fechado = ", elapsed_stop)
+        
+        # the right eye is closed
+        elif state.eye == [0, 1]:
+
+            # update the timers on the left eye and on both eyes
+            self.timeLeftEyeClosed = time.time()
+            self.timeBothEyesClosed = time.time()
+
+            # check for how much time the right eye has been closed
+            elapsed_stop = time.time() - self.timeRightEyeClosed
+            if elapsed_stop > self.delay and not self.clicked:
+                pyautogui.rightClick()
+                self.clicked = True
+
+            print("[DEBUG] tempo com olho direito fechado = ", elapsed_stop)
+
+        # both eyes are closed
+        elif state.eye == [1, 1]:
+
+            # update the timers on the left eye and on the right eye
+            self.timeLeftEyeClosed = time.time()
+            self.timeRightEyeClosed = time.time()
+
+            # check for how much time both eyes has been closed
+            elapsed_stop = time.time() - self.timeBothEyesClosed
+            if elapsed_stop > self.delay and not self.clicked:
+                pyautogui.doubleClick()
+                self.clicked = True
+
+            print("[DEBUG] tempo com os dois olhos fechado = ", elapsed_stop)
+
+        # both eyes are open
+        if state.eye == [0, 0]:
+            # update all time counters
+            self.timeLeftEyeClosed = time.time()
+            self.timeRightEyeClosed = time.time()
+            self.timeBothEyesClosed = time.time()
+            self.clicked = False

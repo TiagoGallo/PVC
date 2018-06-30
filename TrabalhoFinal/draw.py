@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 def draw_landmarks(img, landmarks, landmark_color_map):
     """

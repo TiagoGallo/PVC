@@ -5,6 +5,7 @@ import argparse
 import draw
 import detect
 from mouse import Mouse
+from state import State
 
 # landmark color mapping for drawing
 LANDMARK_COLOR_MAP = {
@@ -19,9 +20,6 @@ LANDMARK_COLOR_MAP = {
     "chin": (0, 0, 0) #Desenha os pontos da bochecha de preto
 }
 
-def nothing(arg = None):
-    pass
-
 def main():
     """
     Main function.
@@ -31,7 +29,7 @@ def main():
     ap = argparse.ArgumentParser('Settings for the mouse.')
     ap.add_argument('-d', '--delay', type=int, default=3,
         help='Delay before registering mouse click.')
-    ap.add_argument('-c', '--click', type=str, default='dwell'
+    ap.add_argument('-c', '--click-mode', type=str, default='dwell',
         help='Clicking method. Can be \'dwell\' or \'eye\'.')
     ap.add_argument('-m', '--max_acc', type=int, default=20,
         help='Velocity of the mouse')
@@ -44,9 +42,14 @@ def main():
     cv2.createTrackbar('Left', 'Webcam', 50, 100, lambda: None)
     cv2.createTrackbar('Right', 'Webcam', 50, 100, lambda: None)
     cv2.createTrackbar('Sens', 'Webcam', 100, 200, lambda: None)
+    if args['click_mode'] == 'eye':
+        cv2.createTrackbar('Eye AR', 'Webcam', 10, 100, lambda: None)
 
     # create video capture object with the default webcam
     cam = cv2.VideoCapture(0)
+
+    # create the user state object
+    state = State()
 
     # create the mouse object
     mouse = Mouse(args)
@@ -75,9 +78,9 @@ def main():
                 # try to find the landmarks on the detected face
                 landmarks = detect.find_landmarks(img, location)
                 if landmarks is not None:
-                
+
                     # get the relative pose of the face
-                    state = detect.user_state(img, landmarks, location)
+                    state.update_state(img, landmarks, location)
 
                     # draw the bounding box and the landmarks on the frame
                     draw.draw_bbox(img, location)
