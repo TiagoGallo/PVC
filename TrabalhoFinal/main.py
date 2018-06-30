@@ -29,10 +29,12 @@ def main():
 
     # setup argument parser
     ap = argparse.ArgumentParser('Settings for the mouse.')
-    ap.add_argument('-d', '--delay', type=int, default=1,
+    ap.add_argument('-d', '--delay', type=int, default=3,
         help='Delay before registering mouse click.')
-    ap.add_argument('-c', '--click', type=str,
+    ap.add_argument('-c', '--click', type=str, default='dwell'
         help='Clicking method. Can be \'dwell\' or \'eye\'.')
+    ap.add_argument('-m', '--max_acc', type=int, default=20,
+        help='Velocity of the mouse')
     args = vars(ap.parse_args())
 
     # Create OpenCV window and trackbars (and initialize them to default values)
@@ -82,7 +84,7 @@ def main():
                     draw.draw_landmarks(img, landmarks, LANDMARK_COLOR_MAP)
 
                     # move mouse according to state
-                    mouse.move(state)
+                    mouse.update(state)
 
             # show the frame
             cv2.imshow("Webcam", img)
