@@ -29,6 +29,10 @@ class Mouse:
         '''
         Analyze what to do with the mouse
         '''
+        # protect from first interation
+        if state.mov is None:
+            return
+
         # get the mouse position
         w_pos, h_pos = self.actual_position()
 

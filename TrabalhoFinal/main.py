@@ -91,6 +91,9 @@ def main():
 
             # show the frame
             cv2.imshow("Webcam", img)
+
+        # move mouse according to state
+        mouse.update(state)
         
         counter = (counter + 1) % numSkippedFrames
 
