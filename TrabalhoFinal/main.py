@@ -37,13 +37,13 @@ def main():
 
     # Create OpenCV window and trackbars (and initialize them to default values)
     cv2.namedWindow("Webcam")
-    cv2.createTrackbar('Up', 'Webcam', 50, 100, lambda: None)
-    cv2.createTrackbar('Down', 'Webcam', 50, 100, lambda: None)
-    cv2.createTrackbar('Left', 'Webcam', 50, 100, lambda: None)
-    cv2.createTrackbar('Right', 'Webcam', 50, 100, lambda: None)
-    cv2.createTrackbar('Sens', 'Webcam', 100, 200, lambda: None)
+    cv2.createTrackbar('Up', 'Webcam', 50, 100, lambda _: None)
+    cv2.createTrackbar('Down', 'Webcam', 50, 100, lambda _: None)
+    cv2.createTrackbar('Left', 'Webcam', 50, 100, lambda _: None)
+    cv2.createTrackbar('Right', 'Webcam', 50, 100, lambda _: None)
+    cv2.createTrackbar('Sens', 'Webcam', 100, 200, lambda _: None)
     if args['click_mode'] == 'eye':
-        cv2.createTrackbar('Eye AR', 'Webcam', 10, 100, lambda: None)
+        cv2.createTrackbar('Eye AR', 'Webcam', 10, 100, lambda _: None)
 
     # create video capture object with the default webcam
     cam = cv2.VideoCapture(0)
