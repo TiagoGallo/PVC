@@ -29,7 +29,7 @@ def main():
     ap = argparse.ArgumentParser('Settings for the mouse.')
     ap.add_argument('-d', '--delay', type=int, default=3,
         help='Delay before registering mouse click.')
-    ap.add_argument('-c', '--click-mode', type=str, default='dwell',
+    ap.add_argument('-c', '--click-mode', type=str, default='eye',
         help='Clicking method. Can be \'dwell\' or \'eye\'.')
     ap.add_argument('-m', '--max_acc', type=int, default=20,
         help='Velocity of the mouse')
@@ -87,13 +87,13 @@ def main():
                     draw.draw_landmarks(img, landmarks, LANDMARK_COLOR_MAP)
 
                     # move mouse according to state
-                    mouse.update(state)
+                    mouse.update(state, img)
 
             # show the frame
             cv2.imshow("Webcam", img)
 
         # move mouse according to state
-        mouse.update(state)
+        mouse.update(state, img)
         
         counter = (counter + 1) % numSkippedFrames
 

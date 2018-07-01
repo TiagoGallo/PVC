@@ -1,5 +1,6 @@
 import pyautogui
 import time
+import cv2
 from state import State
 
 class Mouse:
@@ -25,7 +26,7 @@ class Mouse:
         self.timeRightEyeClosed = time.time()
         self.timeBothEyesClosed = time.time()
 
-    def update(self, state):
+    def update(self, state, img):
         '''
         Analyze what to do with the mouse
         '''
@@ -45,6 +46,7 @@ class Mouse:
         elif self.mode == 'eye':
             self.eye_click(state)
 
+        self.drawArrow(state, img)
         #print("[DEBUG] accX = {}\taccY = {}".format(self.accX, self.accY))
 
     def move(self, state):
@@ -174,3 +176,28 @@ class Mouse:
             self.timeRightEyeClosed = time.time()
             self.timeBothEyesClosed = time.time()
             self.clicked = False
+
+    def drawArrow(self, state, img):
+        '''
+        Draw an arrow that indicate the mouse movement
+        '''
+        X, Y = state.mov
+
+        if X == 0 and Y == 0:
+            return
+        elif X == 1 and Y == 0:
+            cv2.arrowedLine(img, (20,50), (100, 50), (0,0,255), 3)
+        elif X == -1 and Y == 0:
+            cv2.arrowedLine(img, (100, 50), (20,50), (0,0,255), 3)
+        elif X == 0 and Y == 1:
+            cv2.arrowedLine(img, (60, 100), (60,20), (0,0,255), 3)
+        elif X == 1 and Y == 1:
+            cv2.arrowedLine(img, (20, 100), (100,20), (0,0,255), 3)
+        elif X == -1 and Y == 1:
+            cv2.arrowedLine(img, (100, 100), (20,20), (0,0,255), 3)
+        elif X == 0 and Y == -1:
+            cv2.arrowedLine(img, (60, 20), (60, 100), (0,0,255), 3)
+        elif X == 1 and Y == -1:
+            cv2.arrowedLine(img, (20, 20), (100,100), (0,0,255), 3)
+        elif X == -1 and Y == -1:
+            cv2.arrowedLine(img, (100, 20), (20,100), (0,0,255), 3)
