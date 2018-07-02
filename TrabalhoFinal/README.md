@@ -21,5 +21,5 @@ Todos os parâmetros são opcionais, portanto o programa pode ser executado sem 
 ### Descrição dos parâmetros
 
 * DELAY_TIME (-d): É o tempo (em segundos) que o usuário precisa ficar sem mover o mouse ou com um olho fechado para caracterizar o clique do mouse. O valor default é 3.
-* CLICK_MODE (-c): É o modo utilizado para fazer o clique do mouse, pode ser definido como 'dwell' (mouse será clicado quando parado) ou 'eye' (mouse será clicado quando o olho estiver fechado). O valor default é 'eye'.
+* CLICK_MODE (-c): É o modo utilizado para fazer o clique do mouse, pode ser definido como 'dwell' (mouse será clicado quando parado), 'eye' (mouse será clicado quando o olho estiver fechado, olho esquerdo para clique esquerdo, olho direito para clique direito e os dois olhos para clique duplo), e 'simple-eye' (clique esquerdo do mouse quando os dois olhos estiverem fechados). O valor default é 'eye'.
 * MAX_ACCELARATION (-m): Quando o mouse começa a se mover ele vai movimentando lentamente e acelerando conforme o tempo, esse parâmetro indica o valor máximo que o movimento do mouse pode atingir. Os valor significa quantos pixels o mouse vai ser movimentar em cada iteração. O valor default é 20.
