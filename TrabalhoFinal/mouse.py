@@ -1,6 +1,8 @@
 import pyautogui
 import time
 import cv2
+import numpy as np
+import draw
 from state import State
 
 class Mouse:
@@ -26,16 +28,28 @@ class Mouse:
         self.timeRightEyeClosed = time.time()
         self.timeBothEyesClosed = time.time()
 
+        # loads the eye icons and color them blue
+        eye_open_raw = cv2.imread('eye-open.png', cv2.IMREAD_UNCHANGED)
+        eye_closed_raw = cv2.imread('eye-closed.png', cv2.IMREAD_UNCHANGED)
+        self.eye_open = np.zeros((eye_open_raw.shape[0], eye_open_raw.shape[1], 3))
+        self.eye_closed = np.zeros((eye_closed_raw.shape[0], eye_closed_raw.shape[1], 3))
+        self.eye_open[eye_open_raw[:, :, 3] == 255] = [255, 0, 0]
+        self.eye_closed[eye_closed_raw[:, :, 3] == 255] = [255, 0, 0]    
+
     def update(self, state, img):
         '''
         Analyze what to do with the mouse
         '''
-        # protect from first interation
-        if state.mov is None:
-            return
-
         # get the mouse position
         w_pos, h_pos = self.actual_position()
+
+        # draw the eyes according to the state
+        eye_size = int(0.1*img.shape[1])
+        if self.eye_open.shape != (eye_size, eye_size, 4):
+            self.eye_open = cv2.resize(self.eye_open, (eye_size, eye_size))
+        if self.eye_closed.shape != (eye_size, eye_size, 4):
+            self.eye_closed = cv2.resize(self.eye_closed, (eye_size, eye_size))
+        draw.draw_eyes(img, state, self.eye_open, self.eye_closed)
 
         # call the function to update the accelarators
         self.move(state)
@@ -46,7 +60,7 @@ class Mouse:
         elif self.mode == 'eye':
             self.eye_click(state)
 
-        self.drawArrow(state, img)
+        draw.drawArrow(state, img)
         #print("[DEBUG] accX = {}\taccY = {}".format(self.accX, self.accY))
 
     def move(self, state):
@@ -176,28 +190,3 @@ class Mouse:
             self.timeRightEyeClosed = time.time()
             self.timeBothEyesClosed = time.time()
             self.clicked = False
-
-    def drawArrow(self, state, img):
-        '''
-        Draw an arrow that indicate the mouse movement
-        '''
-        X, Y = state.mov
-
-        if X == 0 and Y == 0:
-            return
-        elif X == 1 and Y == 0:
-            cv2.arrowedLine(img, (20,50), (100, 50), (0,0,255), 3)
-        elif X == -1 and Y == 0:
-            cv2.arrowedLine(img, (100, 50), (20,50), (0,0,255), 3)
-        elif X == 0 and Y == 1:
-            cv2.arrowedLine(img, (60, 100), (60,20), (0,0,255), 3)
-        elif X == 1 and Y == 1:
-            cv2.arrowedLine(img, (20, 100), (100,20), (0,0,255), 3)
-        elif X == -1 and Y == 1:
-            cv2.arrowedLine(img, (100, 100), (20,20), (0,0,255), 3)
-        elif X == 0 and Y == -1:
-            cv2.arrowedLine(img, (60, 20), (60, 100), (0,0,255), 3)
-        elif X == 1 and Y == -1:
-            cv2.arrowedLine(img, (20, 20), (100,100), (0,0,255), 3)
-        elif X == -1 and Y == -1:
-            cv2.arrowedLine(img, (100, 20), (20,100), (0,0,255), 3)

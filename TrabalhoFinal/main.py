@@ -6,6 +6,7 @@ import draw
 import detect
 from mouse import Mouse
 from state import State
+import dlib
 
 # landmark color mapping for drawing
 LANDMARK_COLOR_MAP = {
@@ -88,6 +89,11 @@ def main():
 
                     # move mouse according to state
                     mouse.update(state, img)
+
+            # state should be zeroed if no face was found
+            else:
+                state.mov = [0, 0]
+                state.eye = [0, 0]
 
             # show the frame
             cv2.imshow("Webcam", img)
