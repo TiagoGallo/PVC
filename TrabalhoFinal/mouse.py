@@ -59,6 +59,8 @@ class Mouse:
             self.dwell_click(state)
         elif self.mode == 'eye':
             self.eye_click(state)
+        elif self.mode == 'simple-eye':
+            self.simple_eye_click(state)
 
         draw.drawArrow(state, img)
         #print("[DEBUG] accX = {}\taccY = {}".format(self.accX, self.accY))
@@ -188,5 +190,25 @@ class Mouse:
             # update all time counters
             self.timeLeftEyeClosed = time.time()
             self.timeRightEyeClosed = time.time()
+            self.timeBothEyesClosed = time.time()
+            self.clicked = False
+
+    def simple_eye_click(self, state):
+        '''
+        Check if we need to click (simple eye mode)
+        '''
+        # both eyes are closed
+        if state.eye == [1, 1]:
+
+            # check for how much time both eyes has been closed
+            elapsed_stop = time.time() - self.timeBothEyesClosed
+            if elapsed_stop > self.delay and not self.clicked:
+                pyautogui.click()
+                self.clicked = True
+
+            print("[DEBUG] tempo com os dois olhos fechado = ", elapsed_stop)
+
+        # update time counter
+        else:
             self.timeBothEyesClosed = time.time()
             self.clicked = False

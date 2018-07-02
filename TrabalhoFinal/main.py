@@ -31,7 +31,7 @@ def main():
     ap.add_argument('-d', '--delay', type=int, default=3,
         help='Delay before registering mouse click.')
     ap.add_argument('-c', '--click-mode', type=str, default='eye',
-        help='Clicking method. Can be \'dwell\' or \'eye\'.')
+        help='Clicking method. Can be \'dwell\', \'eye\' or \'simple-eye\'.')
     ap.add_argument('-m', '--max_acc', type=int, default=20,
         help='Velocity of the mouse')
     args = vars(ap.parse_args())
@@ -43,7 +43,7 @@ def main():
     cv2.createTrackbar('Left', 'Webcam', 50, 100, lambda _: None)
     cv2.createTrackbar('Right', 'Webcam', 50, 100, lambda _: None)
     cv2.createTrackbar('Sens', 'Webcam', 100, 200, lambda _: None)
-    if args['click_mode'] == 'eye':
+    if args['click_mode'] == 'eye' or args['click_mode'] == 'simple-eye':
         cv2.createTrackbar('Eye AR', 'Webcam', 10, 100, lambda _: None)
 
     # create video capture object with the default webcam
